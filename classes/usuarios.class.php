@@ -20,7 +20,7 @@ class Usuarios {
 
     public function insert($rNome, $rSenha, $rIncluir, $rAlterar, $rExcluir, $rLogin, $rEmail) {
         try {
-            $rSql = "INSERT INTO usuarios (nome,senha,incluir,alterar,excluir,login,email) 
+            $rSql = "INSERT INTO usuario (nome,senha,incluir,alterar,excluir,login,email) 
                            VALUE (:nome,:senha,:incluir,:alterar,:excluir,:login,:email);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
@@ -45,7 +45,7 @@ class Usuarios {
 
     public function update($rNome, $rIncluir, $rAlterar, $rExcluir, $rLogin, $rEmail, $rId) {
         try {
-            $sql = "UPDATE usuarios  SET 
+            $sql = "UPDATE usuario  SET 
                         nome=:nome,
                         incluir=:incluir,
                         alterar= :alterar,
@@ -74,7 +74,7 @@ class Usuarios {
 
     public function alterarSenha($rId, $rSenha) {
         try {
-            $sql = "UPDATE usuarios SET senha=:senha WHERE id= :id;";
+            $sql = "UPDATE usuario SET senha=:senha WHERE id= :id;";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':senha', md5($rSenha));
             $stm->bindValue(':id', $rId);
@@ -92,7 +92,7 @@ class Usuarios {
     public function delete($rId) {
         if (!empty($rId)):
             try {
-                $sql = "DELETE FROM usuarios WHERE id=:id";
+                $sql = "DELETE FROM usuario WHERE id=:id";
                 $stm = $this->pdo->prepare($sql);
                 $stm->bindValue(':id', $rId);
                 $stm->execute();
@@ -108,7 +108,7 @@ class Usuarios {
 
     public function select() {
         try {
-            $sql = "SELECT * FROM usuarios ";
+            $sql = "SELECT * FROM usuario ";
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -120,7 +120,7 @@ class Usuarios {
 
     public function selectUM($rWhere) {
         try {
-            $sql = "SELECT * FROM usuarios " . $rWhere;
+            $sql = "SELECT * FROM usuario " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -132,8 +132,8 @@ class Usuarios {
 
     public function montaSelect($rNome = 'bairro_id', $rSelecionado = null) {
         try {
-            $objBairros = Bairro::getInstance(Conexao::getInstance());
-            $dados = $objBairros->select();
+            $objUsuarios = Usuarios::getInstance(Conexao::getInstance());
+            $dados = $objUsuarios->select();
             $select = '';
             $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Escolha um bairro ...">'
                     . '<option value="">&nbsp;</option>';

@@ -1,11 +1,31 @@
+<?php
+require_once './classes/funcoes.class.php';
+require_once './classes/logger.class.php';
+require_once './classes/conexao.class.php';
+require_once './classes/usuarios.class.php';
+$objUsuarios = Usuarios::getInstance(Conexao::getInstance());
+
+if (isset($_POST['email'])){
+    $wEmail = $_POST['email'];
+    define('LOGIN',$wEmail);
+    $wSenha = md5($_POST['senha']);
+    $usuarios = $objUsuarios->selectUM(" WHERE TRIM(email)='$wEmail' AND TRIM(senha)='$wSenha' ");
+    
+    if (!empty($usuarios)){
+            session_start();
+            $_SESSION['login'] = $usuarios->nome;
+            header('Location: principal.php');
+    }else{
+        escreve("não");
+    }    
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Controle de Contas</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -26,9 +46,9 @@
             <div class="card-body">
                 <p class="login-box-msg">Faça seu login para acessar</p>
 
-                <form action="./principal.php" method="post">
+                <form action="" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="exemplo@exemplo.com">
+                        <input type="email" name="email" class="form-control" placeholder="exemplo@exemplo.com">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -36,7 +56,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Senha">
+                        <input type="password" name="senha" class="form-control" placeholder="Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
