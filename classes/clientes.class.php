@@ -111,7 +111,7 @@ class Clientes
     public function select($rWhere = '')
     {
         try {
-            $sql = "SELECT * FROM clientes " . $rWhere;
+            $sql = "SELECT * FROM cliente " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);

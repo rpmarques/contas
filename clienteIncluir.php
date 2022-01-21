@@ -1,12 +1,11 @@
-<?php 
-require_once './header.php'; 
-if ($_POST){
-  if (isset($_POST['nome'])){
+<?php
+require_once './header.php';
+if ($_POST) {
+  if (isset($_POST['nome'])) {
     $ret = $objClientes->insert($_POST['nome'], '', '', '', '', '');
   }
 }
 ?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -17,16 +16,14 @@ if ($_POST){
         <!-- left column -->
         <div class="col-md-12">
           <?php
-          if(isset($ret)){
-            if($ret){
+          if (isset($ret)) {
+            if ($ret) {
               require_once './alertaSucesso.php';
-            }else{
+            } else {
               require_once './alertaErro.php.php';
             }
           }
-            
           ?>
-
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
@@ -55,7 +52,8 @@ if ($_POST){
               </div>
             </form>
           </div> <!-- /.card -->
-        </div> <!--/.col  -->
+        </div>
+        <!--/.col  -->
       </div> <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section> <!-- /.content -->
