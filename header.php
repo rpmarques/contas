@@ -1,4 +1,15 @@
-
+<?php 
+require_once './classes/funcoes.class.php';
+require_once './classes/logger.class.php';
+require_once './classes/conexao.class.php';
+require_once './classes/usuarios.class.php';
+require_once './classes/clientes.class.php';
+$objClientes = Clientes::getInstance(Conexao::getInstance());
+session_start();
+if (!isset($_SESSION['login'])) {
+    vaiPraPagina('index');
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

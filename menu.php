@@ -20,13 +20,10 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Level 3</p> </a>
+                            <a href="./clienteIncluir.php" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Incluir</p> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Level 3</p> </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Level 3</p> </a>
+                            <a href="#" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Listar</p> </a>
                         </li>
                     </ul>
                 </li> <!-- CLIENTES -->

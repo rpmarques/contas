@@ -22,7 +22,7 @@ class Clientes
     public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato)
     {
         try {
-            $rSql = "INSERT INTO clientes (nome,cnpj,fone1,fone2,email,contato ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
+            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
