@@ -36,13 +36,37 @@ if ($_POST) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Nome</label>
-                      <input type="text" class="form-control form-control-sm" name="nome">
+                      <input type="text" class="form-control form-control-sm" name="nome" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CNPJ</label>
+                      <input type="text" class="form-control form-control-sm cnpj" name="cnpj" data-inputmask='"mask": "99.999.999/9999-99"' data-mask >                     
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CPF</label>
+                      <input class="form-control form-control-sm cpf" name="cpf" data-inputmask='"mask": "999.999.999-99"' data-mask>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Fone 1</label>
+                      <input class="form-control form-control-sm fone" name="fone1" data-inputmask='"mask": "(99)-99999-9999"' data-mask>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Fone 2</label>
+                      <input class="form-control form-control-sm fone" name="fone2" data-inputmask='"mask": "(99)-99999-9999"' data-mask>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>CNPJ / CPF</label>
-                      <input class="form-control form-control-sm " name="cnpj">
+                      <label>Email</label>
+                      <input class="form-control form-control-sm " name="email" type="email">
                     </div>
                   </div>
                 </div>
