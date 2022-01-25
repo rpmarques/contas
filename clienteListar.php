@@ -34,7 +34,7 @@ require_once './header.php';
                                             <td><?=$cli->nome;?></td>
                                             <td><?=$cli->fone1;?></td>
                                             <td><?=$cli->fone2;?></td>
-                                            <td><?=$cli->email;?></td>
+                                            <td><?=$cli->Email;?></td>
                                             <td>
                                                 <a class="btn bg-gradient-primary btn-xs" href="./clienteAlterar.php?id=<?=$cli->id ?>"><i class="fa fa-edit"></i> Editar </a> 
                                                 <a class="btn bg-gradient-danger btn-xs"  href="./clienteExcluir.php?id=<?=$cli->id?>"><i class="fa fa-eraser"></i> Exluir </a>
