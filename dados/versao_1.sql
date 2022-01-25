@@ -56,4 +56,4 @@ CREATE TABLE `usuario` (
 LOCK TABLES `usuario` WRITE;
 UNLOCK TABLES;
 
-INSERT INTO `usuario` (email,senha) VALUES ('ricardo80@gmail.com',md5('123'));
+INSERT INTO `usuario` (email,senha,nome) VALUES ('ricardo80@gmail.com',md5('123'),'Ricardo');
