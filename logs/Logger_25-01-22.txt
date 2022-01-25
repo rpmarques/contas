@@ -19,3 +19,8 @@
 [20:17:32][::1]-> Usuario:[Ricardo] - EXCLUIU CLIENTE - ID:[7] 
 [20:20:13][::1]-> USUARIO:[Ricardo] - INSERIU CLIENTE 
 [20:20:21][::1]-> Usuario:[Ricardo] - EXCLUIU CLIENTE - ID:[8] 
+[22:11:57][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[77] - Mensagem:[SQLSTATE[HY093]: Invalid parameter number: parameter was not defined] - SQL:[UPDATE clientes SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email,contato=:contato, 
+                     cpf=:cpfWHERE id=:id;] 
+[22:12:27][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[77] - Mensagem:[SQLSTATE[HY093]: Invalid parameter number: parameter was not defined] - SQL:[UPDATE cliente SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email,contato=:contato, 
+                     cpf=:cpfWHERE id=:id;] 
+[22:13:01][::1]-> Usuario:[Ricardo] - ALTEROU CLIENTE - ID:[5] 

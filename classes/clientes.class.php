@@ -60,11 +60,11 @@ class Clientes
         endif;
     }
 
-    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId)
+    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId, $rCpf)
     {
         try {
-            $sql = "UPDATE clientes SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email, contato=:contato
-          WHERE id=:id;";
+            $sql = "UPDATE cliente SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email,contato=:contato, 
+                     cpf=:cpf WHERE id=:id;";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -73,6 +73,7 @@ class Clientes
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
             $stm->bindValue(':id', $rId);
+            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU CLIENTE - ID:[' . $rId . ']');

@@ -36,7 +36,7 @@ require_once './header.php';
                                             <td><?=$cli->fone2;?></td>
                                             <td><?=$cli->email;?></td>
                                             <td>
-                                                <a class="btn bg-gradient-primary btn-xs" href="./clienteAlterar.php?id=<?=base64_encode($cli->id) ?>"><i class="fa fa-edit"></i> Editar </a> 
+                                                <a class="btn bg-gradient-primary btn-xs" href="./clienteEditar.php?id=<?=base64_encode($cli->id) ?>"><i class="fa fa-edit"></i> Editar </a> 
                                                 <a class="btn bg-gradient-danger btn-xs"  href="./clienteExcluir.php?id=<?=base64_encode($cli->id)?>"><i class="fa fa-eraser"></i> Exluir </a>
                                             </td>
                                         </tr>
