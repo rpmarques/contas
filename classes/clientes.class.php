@@ -19,10 +19,10 @@ class Clientes
         return self::$cliente;
     }
 
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato)
+    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato,$rCpf)
     {
         try {
-            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
+            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato,cpf ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -30,6 +30,7 @@ class Clientes
             $stm->bindValue(':fone2', $rFone2);
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
+            $stm->bindValue(':cpf', $rCpf);
 
             $stm->execute();
             if ($stm) {

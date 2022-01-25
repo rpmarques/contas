@@ -2,7 +2,14 @@
 require_once './header.php';
 if ($_POST) {
   if (isset($_POST['nome'])) {
-    $ret = $objClientes->insert($_POST['nome'], '', '', '', '', '');
+    $nome = $_POST['nome'];
+    $cnpj = $_POST['cnpj'];
+    $fone1 = $_POST['fone1'];
+    $fone2 = $_POST['fone2'];
+    $email = $_POST['email'];
+    $contato = '';
+    $cpf = $_POST['cpf'];
+    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email,$contato, $cpf);
   }
 }
 ?>
