@@ -46,7 +46,7 @@ class Clientes
     {
         if (!empty($rId)) :
             try {
-                $sql = "DELETE FROM clientes WHERE id=:id";
+                $sql = "DELETE FROM cliente WHERE id=:id";
                 $stm = $this->pdo->prepare($sql);
                 $stm->bindValue(':id', $rId);
                 $stm->execute();
@@ -99,7 +99,7 @@ class Clientes
     public function pegaCli($rID)
     {
         try {
-            echo $sql = "SELECT * FROM clientes WHERE id=" . $rID;
+            $sql = "SELECT * FROM cliente WHERE id=$rID" ;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);

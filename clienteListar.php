@@ -22,7 +22,7 @@ require_once './header.php';
                                         <th>Nome</th>
                                         <th>Fone 1</th>
                                         <th>Fone 2</th>
-                                        <th>email</th>
+                                        <th>Email</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -34,10 +34,10 @@ require_once './header.php';
                                             <td><?=$cli->nome;?></td>
                                             <td><?=$cli->fone1;?></td>
                                             <td><?=$cli->fone2;?></td>
-                                            <td><?=$cli->Email;?></td>
+                                            <td><?=$cli->email;?></td>
                                             <td>
-                                                <a class="btn bg-gradient-primary btn-xs" href="./clienteAlterar.php?id=<?=$cli->id ?>"><i class="fa fa-edit"></i> Editar </a> 
-                                                <a class="btn bg-gradient-danger btn-xs"  href="./clienteExcluir.php?id=<?=$cli->id?>"><i class="fa fa-eraser"></i> Exluir </a>
+                                                <a class="btn bg-gradient-primary btn-xs" href="./clienteAlterar.php?id=<?=base64_encode($cli->id) ?>"><i class="fa fa-edit"></i> Editar </a> 
+                                                <a class="btn bg-gradient-danger btn-xs"  href="./clienteExcluir.php?id=<?=base64_encode($cli->id)?>"><i class="fa fa-eraser"></i> Exluir </a>
                                             </td>
                                         </tr>
                                     <?php } ?>
