@@ -19,10 +19,11 @@ class Fornecedores
         return self::$fornecedor;
     }
 
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato)
+    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato,$rCpf)
     {
         try {
-            $rSql = "INSERT INTO fornecedores (nome,cnpj,fone1,fone2,email,contato ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
+            $rSql = "INSERT INTO fornec (nome,cnpj,fone1,fone2,email,contato,cpf)
+                     VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -30,7 +31,7 @@ class Fornecedores
             $stm->bindValue(':fone2', $rFone2);
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
-
+            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU FORNECEDOR');
@@ -45,7 +46,7 @@ class Fornecedores
     {
         if (!empty($rId)) :
             try {
-                $sql = "DELETE FROM fornecedores WHERE id=:id";
+                $sql = "DELETE FROM fornec WHERE id=:id";
                 $stm = $this->pdo->prepare($sql);
                 $stm->bindValue(':id', $rId);
                 $stm->execute();
@@ -59,11 +60,11 @@ class Fornecedores
         endif;
     }
 
-    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId)
+    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId,$rCpf)
     {
         try {
-            $sql = "UPDATE fornecedores SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email, contato=:contato
-          WHERE id=:id;";
+            $sql = "UPDATE fornec SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email, contato=:contato,
+                    cpf=:cpf WHERE id=:id;";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -72,6 +73,7 @@ class Fornecedores
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
             $stm->bindValue(':id', $rId);
+            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU FORNECEDOR - ID:[' . $rId . ']');
@@ -85,7 +87,7 @@ class Fornecedores
     public function selectUM($rWhere)
     {
         try {
-            echo $sql = "SELECT * FROM fornecedores " . $rWhere;
+            echo $sql = "SELECT * FROM fornec " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -97,7 +99,7 @@ class Fornecedores
     public function pegaFornec($rID)
     {
         try {
-            echo $sql = "SELECT * FROM fornecedores WHERE id=" . $rID;
+            $sql = "SELECT * FROM fornec WHERE id=" . $rID;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -110,7 +112,7 @@ class Fornecedores
     public function select($rWhere = '')
     {
         try {
-            $sql = "SELECT * FROM fornecedores " . $rWhere;
+            $sql = "SELECT * FROM fornec " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);

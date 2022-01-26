@@ -1,4 +1,9 @@
 <?php
+//DEIXO SOMENTE APARECENDO OS ERROS CRÍTICOS
+//error_reporting(E_ERROR|E_PARSE);
+// REPORTA TODOS OS ERROS E AVISOS
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 require_once './classes/funcoes.class.php';
 require_once './classes/logger.class.php';
 require_once './classes/conexao.class.php';
