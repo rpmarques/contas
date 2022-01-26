@@ -43,6 +43,11 @@
                 </li> <!-- FORNECEDORES -->
             </ul>
         </li>
+        <li class="nav-item">
+            <a href="./logout.php" class="nav-link"> <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p> Sair </p>
+            </a>
+        </li>
 
         <li class="nav-header">EXEMPLOS</li>
         <li class="nav-item">
