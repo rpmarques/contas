@@ -1,4 +1,18 @@
 $(document).ready(function () {
+// PRICEFORMAT
+  $('.valor').priceFormat({
+    prefix: 'R$ ',
+    centsSeparator: ',',
+    thousandsSeparator: '.',
+    allowNegative: false
+});
+$('.qtde').priceFormat({
+    prefix: '',
+    centsSeparator: ',',
+    thousandsSeparator: '.',
+    allowNegative: false
+});
+
   // DATAPICKER
   $('.data').datepicker({
     format: "dd/mm/yyyy",

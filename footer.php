@@ -37,6 +37,7 @@
 <!-- Select2 -->
 <script src="./plugins/select2/js/select2.full.min.js"></script>
 <script src="./plugins/select2/js/i18n/pt-BR.js"></script>
+<script src="./dist/js/priceformat/jquery.priceformat.js"></script>
 <!-- AdminLTE App -->
 <script src="./dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
