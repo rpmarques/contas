@@ -9,7 +9,7 @@ if ($_POST) {
     $email = $_POST['email'];
     $contato = '';
     $cpf = $_POST['cpf'];
-    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email,$contato, $cpf);
+    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
   }
 }
 ?>
@@ -43,31 +43,31 @@ if ($_POST) {
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Nro NF</label>
-                      <input type="text" class="form-control form-control-sm" name="nronf" >
+                      <input type="text" class="form-control form-control-sm" name="nronf">
                     </div>
                   </div>
                   <div class="col-md-1">
                     <div class="form-group">
                       <label>Série</label>
-                      <input type="text" class="form-control form-control-sm " name="serie"  >                     
+                      <input type="text" class="form-control form-control-sm " name="serie">
                     </div>
                   </div>
                   <div class="col-md-1">
                     <div class="form-group">
                       <label>Data</label>
-                      <input type="text" class="form-control form-control-sm " name="datac"  >                     
+                      <input type="text" class="form-control form-control-sm " name="datac">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Cliente</label>
-                      <input class="form-control form-control-sm " name="cliente_id" >
+                      <input class="form-control form-control-sm " name="cliente_id">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Valor</label>
-                      <input class="form-control form-control-sm " name="valor" >
+                      <input class="form-control form-control-sm " name="valor">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -76,6 +76,13 @@ if ($_POST) {
                       <input class="form-control form-control-sm " name="text" type="text">
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Date:</label>
+                      <input type="text" class="form-control data" value="<?php echo date('d/m/Y') ?>" name="datac" required="">
+                    </div>
+                  </div>
+
                 </div>
               </div> <!-- /.card-body -->
               <div class="card-footer">

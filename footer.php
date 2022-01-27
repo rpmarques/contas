@@ -18,6 +18,9 @@
 <!-- InputMask -->
 <script src="./plugins/moment/moment.min.js"></script>
 <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- Datepicker -->
+<script src="./plugins/datapicker/js/bootstrap-datepicker.js"> </script>
+<script src="./plugins/datapicker/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>            
 <!-- DataTables  & Plugins -->
 <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
