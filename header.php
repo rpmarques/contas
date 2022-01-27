@@ -31,6 +31,9 @@ if (!isset($_SESSION['login'])) {
   <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Datepicker -->
   <link href="./plugins/datapicker/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="./plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 </head>

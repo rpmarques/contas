@@ -11,9 +11,9 @@
   </aside>   <!-- /.control-sidebar -->
 </div> <!-- ./wrapper -->
 
-<!-- Bootstrap 4 -->
 <!-- jQuery -->
 <script src="./plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
 <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- InputMask -->
 <script src="./plugins/moment/moment.min.js"></script>
@@ -34,6 +34,9 @@
 <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Select2 -->
+<script src="./plugins/select2/js/select2.full.min.js"></script>
+<script src="./plugins/select2/js/i18n/pt-BR.js"></script>
 <!-- AdminLTE App -->
 <script src="./dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

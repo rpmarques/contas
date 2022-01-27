@@ -34,7 +34,7 @@ if ($_POST) {
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Cadastrar Conta à Pagar</h3>
+              <h3 class="card-title">Inclusão de Conta</h3>
             </div> <!-- /.card-header -->
             <!-- form start -->
             <form method="post">
@@ -52,16 +52,16 @@ if ($_POST) {
                       <input type="text" class="form-control form-control-sm " name="serie">
                     </div>
                   </div>
-                  <div class="col-md-1">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Data</label>
-                      <input type="text" class="form-control form-control-sm " name="datac">
+                      <input type="text" class="form-control form-control-sm data" name="datac" value="<?php echo date('d/m/Y') ?>">
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label>Cliente</label>
-                      <input class="form-control form-control-sm " name="cliente_id">
+                      <?=$objClientes->montaSelect('cliente_id');?>
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -76,13 +76,6 @@ if ($_POST) {
                       <input class="form-control form-control-sm " name="text" type="text">
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Date:</label>
-                      <input type="text" class="form-control data" value="<?php echo date('d/m/Y') ?>" name="datac" required="">
-                    </div>
-                  </div>
-
                 </div>
               </div> <!-- /.card-body -->
               <div class="card-footer">

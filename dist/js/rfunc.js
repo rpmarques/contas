@@ -1,13 +1,19 @@
 $(document).ready(function () {
+  // DATAPICKER
   $('.data').datepicker({
     format: "dd/mm/yyyy",
     language: "pt-BR",
     autoclose: "true",
-    immediateUpdates:"true",
+    immediateUpdates: "true",
     todayHighlight: "true"
-});
+  });
 
+  //Select2 
+  $('.select2').select2({
+    theme: 'bootstrap4'
+  })
 
+  // DATATABLE
   $("#example1").DataTable({
     "language": {
       "url": "//cdn.datatables.net/plug-ins/1.11.4/i18n/pt_br.json"
