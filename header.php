@@ -7,6 +7,8 @@ require_once './classes/clientes.class.php';
 $objClientes = Clientes::getInstance(Conexao::getInstance());
 require_once './classes/fornecedores.class.php';
 $objFornecedores = Fornecedores::getInstance(Conexao::getInstance());
+require_once './classes/ctPag.class.php';
+$objContasPagar = CtPag::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');

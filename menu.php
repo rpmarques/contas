@@ -7,6 +7,7 @@
                 <p> Principal </p>
             </a>
         </li>
+        <!-- CADASTROS -->
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
@@ -41,6 +42,43 @@
                         </li>
                     </ul>
                 </li> <!-- FORNECEDORES -->
+            </ul>
+        </li>
+        <!-- MODULOS -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p> Módulos<i class="right fas fa-angle-left"></i> </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <!-- CONTAS A PAGAR -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i> <p> Contas à Pagar <i class="right fas fa-angle-left"></i> </p> 
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="./ctPagIncluir.php" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Incluir</p> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./ctPagListar.php" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Listar</p> </a>
+                        </li>
+                    </ul>
+                </li> <!-- CONTAS A PAGAR -->
+                <!-- CONTAS A RECEBER -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i> <p> Contas à Receber <i class="right fas fa-angle-left"></i> </p> 
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="./fornecedorIncluir.php" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Incluir</p> </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./fornecedorListar.php" class="nav-link"> <i class="far fa-dot-circle nav-icon"></i> <p>Listar</p> </a>
+                        </li>
+                    </ul>
+                </li> <!-- CONTAS A RECEBER -->
             </ul>
         </li>
         <li class="nav-item">
