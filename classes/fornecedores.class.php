@@ -128,7 +128,7 @@ class Fornecedores
             $objFornecedores = Fornecedores::getInstance(Conexao::getInstance());
             $dados = $objFornecedores->select(" ORDER BY nome");
             $select = '';
-            $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Selecione um fornecedor..." style="width: 100%;">'
+            $select = '<select class="form-control form-control-sm select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Selecione um fornecedor..." style="width: 100%;">'
                 . '<option value="">&nbsp;</option>';
             foreach ($dados as $linhaDB) {
                 if (!empty($rSelecionado) && $rSelecionado === $linhaDB->id) {

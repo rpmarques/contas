@@ -1,15 +1,23 @@
 <?php
 require_once './header.php';
 if ($_POST) {
-  if (isset($_POST['nome'])) {
-    $nome = $_POST['nome'];
-    $cnpj = $_POST['cnpj'];
-    $fone1 = $_POST['fone1'];
-    $fone2 = $_POST['fone2'];
-    $email = $_POST['email'];
-    $contato = '';
-    $cpf = $_POST['cpf'];
-    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
+  if (isset($_POST['valor'])) {
+    $nronf = $_POST['nronf'];
+    $serie = $_POST['serie'];
+    $datac = $_POST['datac'];
+    $fornecedorID = $_POST['fornecedor_id'];
+    $valor = $_POST['valor'];
+    $historico = $_POST['historico'];
+    $ordem = $_POST['ordem'];
+    escreve("NRONF:[$nronf]");
+    escreve("SERIE:[$serie]");
+    escreve("DATAC:[$datac]");
+    escreve("FORNECEDOR:[$fornecedorID]");
+    escreve("VALOR:[$valor]");
+    escreve("HISTORICO:[$historico]");
+    escreve("ORDEM:[$ordem]");
+
+    $ret = '';//$objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
   }
 }
 ?>
@@ -27,7 +35,7 @@ if ($_POST) {
             if ($ret) {
               require_once './alertaSucesso.php';
             } else {
-              require_once './alertaErro.php.php';
+              require_once './alertaErro.php';
             }
           }
           ?>
@@ -61,7 +69,7 @@ if ($_POST) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Cliente</label>
-                      <?=$objClientes->montaSelect('cliente_id');?>
+                      <?=$objFornecedores->montaSelect('fornecedor_id');?>
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -70,10 +78,16 @@ if ($_POST) {
                       <input class="form-control form-control-sm valor" name="valor">
                     </div>
                   </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label>Parcelas</label>
+                      <input class="form-control form-control-sm " type="number" name="ordem">
+                    </div>
+                  </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Histórico</label>
-                      <input class="form-control form-control-sm " name="text" type="text">
+                      <input class="form-control form-control-sm " name="historico" type="text">
                     </div>
                   </div>
                 </div>
