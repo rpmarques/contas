@@ -1,5 +1,0 @@
-[20:27:01][::1]-> USUARIO:[] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[34] - Mensagem:[SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cnpj' in 'field list'] 
-[20:29:37][::1]-> USUARIO:[] - INSERIU CLIENTE 
-[20:39:27][::1]-> USUARIO:[] - INSERIU CLIENTE 
-[20:41:05][::1]-> USUARIO:[] - INSERIU CLIENTE 
-[20:42:31][::1]-> USUARIO:[Ricardo] - INSERIU CLIENTE 

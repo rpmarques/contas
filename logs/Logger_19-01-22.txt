@@ -1,2 +1,0 @@
-[20:04:57][::1]-> USUARIO:[] - ARQUIVO:[C:\xampp\htdocs\contas\classes\usuarios.class.php] - LINHA:[125] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'contas.usuarios' doesn't exist] 
-[20:15:41][::1]-> USUARIO:[] - ARQUIVO:[C:\xampp\htdocs\contas\classes\usuarios.class.php] - LINHA:[125] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'contas.usuarios' doesn't exist] 

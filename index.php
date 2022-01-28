@@ -19,6 +19,7 @@ if (isset($_POST['email'])){
     if (!empty($usuarios)){
             session_start();
             $_SESSION['login'] = $usuarios->nome;
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
             header('Location: principal.php');
     }else{
         escreve("não");

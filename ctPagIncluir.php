@@ -18,9 +18,8 @@ if ($_POST) {
       $dataVenc = date('d/m/Y');
     }
 
-    $ret = $objContasPagar->incluirConta($datac, $ordem,$dataVenc);
+    $ret = $objContasPagar->incluirConta($nronf, $serie, $datac, $fornecedorID, $valor, $historico, $ordem, $dataVenc);
 
-    $ret = ''; //$objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
   }
 }
 ?>

@@ -1,8 +1,0 @@
-[20:57:45][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\fornecedores.class.php] - LINHA:[35] - Mensagem:[SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cnpj' in 'field list'] 
-[20:58:26][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 
-[21:00:37][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 
-[21:06:33][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[2] 
-[21:06:44][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[2] 
-[22:00:34][::1]-> Usuario:[Ricardo] - EXCLUIU FORNECEDOR - ID:[2] 
-[22:11:04][::1]-> USUARIO:[Ricardo] - INSERIU CLIENTE 
-[22:11:12][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 

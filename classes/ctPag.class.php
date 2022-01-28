@@ -17,48 +17,72 @@ class CtPag
         endif;
         return self::$ctpgag;
     }
-    //public function incluirConta($rNronf,$rSerie,$rDatac,$rFornecedorID,$rValor,$rHistorico,$rOrdem,$rDataVenc){
-    public function incluirConta($rDatac,$rOrdem,$rDataVenc)
+    //public function incluirConta($rDatac,$rOrdem,$rDataVenc)
+    public function incluirConta($rNronf, $rSerie, $rDatac, $rFornecedorID, $rValor, $rHistorico, $rOrdem, $rDataVenc)
+
     {
         try {
-            $auxDataVenc=$rDataVenc;
+            $auxDataVenc = $rDataVenc;
             if ($rOrdem > 1) {
                 //LOOP NO NRO DE PARCELAS
                 for ($i = 1; $i <= $rOrdem; $i++) {
                     //CALCULO DA DATA DE VENCIMENTO                    
-                    if ($i===1){ //PRIMEIRA PARCELA
-                        //$auxDataVenc = $rDataVenc;
-                        escreve("PARCELADO -------- PARCELA:[$i], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc]");  
+                    if ($i === 1) { //PRIMEIRA PARCELA
                         //AQUI FAZ UM INSERT  
-                    }else{ //DEMAIS PARCELAS
+                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                        $stm = $this->pdo->prepare($rSql);
+                        $stm->bindValue(':datac', gravaData($rDatac));
+                        $stm->bindValue(':nronf', $rNronf);
+                        $stm->bindValue(':fornecedor_id', $rFornecedorID);
+                        $stm->bindValue(':valor', gravaMoeda($rValor));
+                        $stm->bindValue(':historico', $rHistorico);
+                        $stm->bindValue(':ordem', $rOrdem);
+                        $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+
+                        $stm->execute();
+                        if ($stm) {
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+                        }
+                    } else { //DEMAIS PARCELAS
                         escreve("PARCELADO -------- PARCELA:[$i], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc]");
-                        //AQUI FAZ UM INSERT
-                    }                       
-                    //$data = somar_datas( $i, 'm'); // adiciona 3 meses a sua data                 
+                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                        $stm = $this->pdo->prepare($rSql);
+                        $stm->bindValue(':datac', gravaData($rDatac));
+                        $stm->bindValue(':nronf', $rNronf);
+                        $stm->bindValue(':fornecedor_id', $rFornecedorID);
+                        $stm->bindValue(':valor', gravaMoeda($rValor));
+                        $stm->bindValue(':historico', $rHistorico);
+                        $stm->bindValue(':ordem', $rOrdem);
+                        $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+
+                        $stm->execute();
+                        if ($stm) {
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+                        }
+                    }
                     $auxDataVenc = somaMes(1, $auxDataVenc);
                 }
             } else {
-                escreve(" AVISTA -------- PARCELA:[$rOrdem], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc] ");
-                //AQUI FAZ UM INSERT
+                $rOrdem === '0' ? $rOrdem = '1' : '';
+                $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                $stm = $this->pdo->prepare($rSql);
+                $stm->bindValue(':datac', gravaData($rDatac));
+                $stm->bindValue(':nronf', $rNronf);
+                $stm->bindValue(':fornecedor_id', $rFornecedorID);
+                $stm->bindValue(':valor', gravaMoeda($rValor));
+                $stm->bindValue(':historico', $rHistorico);
+                $stm->bindValue(':ordem', $rOrdem);
+                $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+
+                $stm->execute();
+                if ($stm) {
+                    Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+                }
             }
-            return;
-
-            // $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
-            //                      VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
-            // $stm = $this->pdo->prepare($rSql);
-            // $stm->bindValue(':datac', gravaData($rDatac));
-            // $stm->bindValue(':nronf', $rNronf);
-            // $stm->bindValue(':fornecedor_id', $rFornecedorID);
-            // $stm->bindValue(':valor', gravaMoeda($rValor));
-            // $stm->bindValue(':historico', $rHistorico);
-            // $stm->bindValue(':ordem', $rOrdem);
-            // $stm->bindValue(':data_venc', gravaData($auxDataVenc));
-
-            // $stm->execute();
-            // if ($stm) {
-            //     Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
-            // }
-            // return $stm;
+            return $stm;
         } catch (PDOException $erro) {
             Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
         }
