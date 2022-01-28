@@ -19,7 +19,6 @@ class CtPag
     }
     //public function incluirConta($rDatac,$rOrdem,$rDataVenc)
     public function incluirConta($rNronf, $rSerie, $rDatac, $rFornecedorID, $rValor, $rHistorico, $rOrdem, $rDataVenc)
-
     {
         try {
             $auxDataVenc = $rDataVenc;
@@ -37,7 +36,7 @@ class CtPag
                         $stm->bindValue(':fornecedor_id', $rFornecedorID);
                         $stm->bindValue(':valor', gravaMoeda($rValor));
                         $stm->bindValue(':historico', $rHistorico);
-                        $stm->bindValue(':ordem', $rOrdem);
+                        $stm->bindValue(':ordem', $i);
                         $stm->bindValue(':data_venc', gravaData($auxDataVenc));
 
                         $stm->execute();
@@ -45,7 +44,6 @@ class CtPag
                             Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
                         }
                     } else { //DEMAIS PARCELAS
-                        escreve("PARCELADO -------- PARCELA:[$i], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc]");
                         $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
                                  VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
                         $stm = $this->pdo->prepare($rSql);
@@ -54,7 +52,7 @@ class CtPag
                         $stm->bindValue(':fornecedor_id', $rFornecedorID);
                         $stm->bindValue(':valor', gravaMoeda($rValor));
                         $stm->bindValue(':historico', $rHistorico);
-                        $stm->bindValue(':ordem', $rOrdem);
+                        $stm->bindValue(':ordem', $i);
                         $stm->bindValue(':data_venc', gravaData($auxDataVenc));
 
                         $stm->execute();
@@ -159,7 +157,7 @@ class CtPag
     public function select($rWhere = '')
     {
         try {
-            $sql = "SELECT * FROM cliente " . $rWhere;
+            $sql = "SELECT * FROM ctpag " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);

@@ -17,9 +17,7 @@ if ($_POST) {
     } else {
       $dataVenc = date('d/m/Y');
     }
-
     $ret = $objContasPagar->incluirConta($nronf, $serie, $datac, $fornecedorID, $valor, $historico, $ordem, $dataVenc);
-
   }
 }
 ?>
