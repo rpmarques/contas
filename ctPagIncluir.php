@@ -8,16 +8,19 @@ if ($_POST) {
     $fornecedorID = $_POST['fornecedor_id'];
     $valor = $_POST['valor'];
     $historico = $_POST['historico'];
-    $ordem = $_POST['ordem'];
-    escreve("NRONF:[$nronf]");
-    escreve("SERIE:[$serie]");
-    escreve("DATAC:[$datac]");
-    escreve("FORNECEDOR:[$fornecedorID]");
-    escreve("VALOR:[$valor]");
-    escreve("HISTORICO:[$historico]");
-    escreve("ORDEM:[$ordem]");
+    $ordem = '1';
+    if ($_POST['ordem'] <> ''){
+      $ordem = $_POST['ordem'];
+    }    
+    if (($_POST['data_venc']) <> '') {
+      $dataVenc = $_POST['data_venc'];
+    } else {
+      $dataVenc = date('d/m/Y');
+    }
 
-    $ret = '';//$objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
+    $ret = $objContasPagar->incluirConta($datac, $ordem,$dataVenc);
+
+    $ret = ''; //$objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
   }
 }
 ?>
@@ -66,10 +69,16 @@ if ($_POST) {
                       <input type="text" class="form-control form-control-sm data" name="datac" value="<?php echo date('d/m/Y') ?>">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-2">
                     <div class="form-group">
-                      <label>Cliente</label>
-                      <?=$objFornecedores->montaSelect('fornecedor_id');?>
+                      <label>Data Venc.</label>
+                      <input type="text" class="form-control form-control-sm data" name="data_venc">
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label>Fornecedor</label>
+                      <?= $objFornecedores->montaSelect('fornecedor_id'); ?>
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -84,7 +93,7 @@ if ($_POST) {
                       <input class="form-control form-control-sm " type="number" name="ordem">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-7">
                     <div class="form-group">
                       <label>Histórico</label>
                       <input class="form-control form-control-sm " name="historico" type="text">

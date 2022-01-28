@@ -2,7 +2,6 @@
 
 class CtPag
 {
-
     // Atributo para conexão com o banco de dados   
     private $pdo = null;
     // Atributo estático para instância da própria classe    
@@ -18,25 +17,48 @@ class CtPag
         endif;
         return self::$ctpgag;
     }
-
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato,$rCpf)
+    //public function incluirConta($rNronf,$rSerie,$rDatac,$rFornecedorID,$rValor,$rHistorico,$rOrdem,$rDataVenc){
+    public function incluirConta($rDatac,$rOrdem,$rDataVenc)
     {
         try {
-            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato,cpf ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
-            $stm = $this->pdo->prepare($rSql);
-            $stm->bindValue(':nome', $rNome);
-            $stm->bindValue(':cnpj', $rCnpj);
-            $stm->bindValue(':fone1', $rFone1);
-            $stm->bindValue(':fone2', $rFone2);
-            $stm->bindValue(':email', strtolower($rEmail));
-            $stm->bindValue(':contato', $rContato);
-            $stm->bindValue(':cpf', $rCpf);
-
-            $stm->execute();
-            if ($stm) {
-                Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CLIENTE');
+            $auxDataVenc=$rDataVenc;
+            if ($rOrdem > 1) {
+                //LOOP NO NRO DE PARCELAS
+                for ($i = 1; $i <= $rOrdem; $i++) {
+                    //CALCULO DA DATA DE VENCIMENTO                    
+                    if ($i===1){ //PRIMEIRA PARCELA
+                        //$auxDataVenc = $rDataVenc;
+                        escreve("PARCELADO -------- PARCELA:[$i], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc]");  
+                        //AQUI FAZ UM INSERT  
+                    }else{ //DEMAIS PARCELAS
+                        escreve("PARCELADO -------- PARCELA:[$i], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc]");
+                        //AQUI FAZ UM INSERT
+                    }                       
+                    //$data = somar_datas( $i, 'm'); // adiciona 3 meses a sua data                 
+                    $auxDataVenc = somaMes(1, $auxDataVenc);
+                }
+            } else {
+                escreve(" AVISTA -------- PARCELA:[$rOrdem], DATAC:[$rDatac], DATA_VENC:[$auxDataVenc] ");
+                //AQUI FAZ UM INSERT
             }
-            return $stm;
+            return;
+
+            // $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
+            //                      VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+            // $stm = $this->pdo->prepare($rSql);
+            // $stm->bindValue(':datac', gravaData($rDatac));
+            // $stm->bindValue(':nronf', $rNronf);
+            // $stm->bindValue(':fornecedor_id', $rFornecedorID);
+            // $stm->bindValue(':valor', gravaMoeda($rValor));
+            // $stm->bindValue(':historico', $rHistorico);
+            // $stm->bindValue(':ordem', $rOrdem);
+            // $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+
+            // $stm->execute();
+            // if ($stm) {
+            //     Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+            // }
+            // return $stm;
         } catch (PDOException $erro) {
             Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
         }
@@ -100,7 +122,7 @@ class CtPag
     public function pegaCli($rID)
     {
         try {
-            $sql = "SELECT * FROM cliente WHERE id=$rID" ;
+            $sql = "SELECT * FROM cliente WHERE id=$rID";
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);

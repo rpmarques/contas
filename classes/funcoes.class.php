@@ -161,5 +161,20 @@ function trocaCor($rTexto,$rProcura) {
     }
     return $rTexto;
 }
+function somaDias($rNroDias,$rData){
+    if (!empty($rNroDias) && $rData){
+        $auXDataVenc = date('d/m/Y', strtotime("+ $rNroDias days", strtotime(gravaData($rData)))); // SOMA DIAS NA DATA
+    }else{
+        escreve("ERRO NA FUNÇÃO somaDias");
+    }
+    return $auXDataVenc;
+}
 
-?>
+function somaMes($rNroMes,$rData){
+    if (!empty($rNroMes) && $rData){
+        $auXDataVenc = date('d/m/Y', strtotime("+ $rNroMes month", strtotime(gravaData($rData)))); // SOMA DIAS NA DATA
+    }else{
+        escreve("ERRO NA FUNÇÃO somaMes");
+    }
+    return $auXDataVenc;
+}
