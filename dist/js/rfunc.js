@@ -12,7 +12,8 @@ $('.qtde').priceFormat({
     thousandsSeparator: '.',
     allowNegative: false
 });
-
+//Date range picker
+$('#reservation').daterangepicker()
   // DATAPICKER
   $('.data').datepicker({
     format: "dd/mm/yyyy",
