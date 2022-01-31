@@ -40,33 +40,34 @@ require_once './header.php';
                                             <?= $objFornecedores->montaSelect('fornecedor_id'); ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                    <div class="form-group">
-                  <label>Date range:</label>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Período</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="far fa-calendar-alt"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control float-right data_intervalo" name="data">
+                                            </div> <!-- /.input group -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group clearfix">
+                                            <label>Emissão ou Vencimento</label><br>
+                                            <div class="icheck-primary d-inline">
+                                                <input type="radio" id="radioPrimary1" name="ordem" value="data" >
+                                                <label for="radioPrimary1"> Por Emissão</label>
+                                            </div>
+                                            <br>
+                                            <div class="icheck-primary d-inline">
+                                                <input type="radio" id="radioPrimary2" name="ordem" value="data_venc">
+                                                <label for="radioPrimary2"> Por Vencimento</label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control float-right" id="reservation">
-                  </div>
-                  <!-- /.input group -->
-                </div>
-                                    </div>
-                                    <!-- <div class="col-md-2">                                    
-                                        <div class="form-group">
-                                            <label>Data Inicial</label>
-                                            <input type="text" class="form-control form-control-sm data" name="datain">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Data Final</label>
-                                            <input type="text" class="form-control form-control-sm data" name="datafi">
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
                             </form>
@@ -88,46 +89,48 @@ require_once './header.php';
                                 <tbody>
                                     <?php
                                     if ($_GET) {
-                                        if (isset($_GET['todas']) || isset($_GET['abertas']) || isset($_GET['pagas']) || ($_GET['fornecedor_id']) <> "" || $_GET['datain'] <> "") {
+                                        if (isset($_GET['todas']) || isset($_GET['abertas']) || isset($_GET['pagas']) || ($_GET['fornecedor_id']) <> "" || $_GET['data'] <> "") {
                                             $todas = isset($_GET['todas']);
                                             $abertas = isset($_GET['abertas']);
                                             $pagas = isset($_GET['pagas']);
                                             $fornecedorID = $_GET['fornecedor_id'] <> "" ? $_GET['fornecedor_id'] : "";
-                                            $datain = $_GET['datain'] <> "" ? $_GET['datain'] : "";
-                                            $datafi = $_GET['datafi'] <> "" ? $_GET['datafi'] : "";
-                                            
-                                            echo '<pre>';
-                                            var_dump($todas);
-                                            var_dump($abertas);
-                                            var_dump($pagas );
-                                            var_dump($fornecedorID );
-                                            var_dump($datain );
-                                            var_dump($datafi );
+                                            $data = isset($_GET['data']) <> "" ? $_GET['data'] : "";
+                                            //01/31/2022 - 01/31/2022
+                                            $datain = gravaData(substr($data, 0, 10));
+                                            $datafi = gravaData(substr($data, 13));
+                                            $ordem = isset($_GET['ordem'])?$_GET['ordem']:"";
                                             //MONTAR O WHERE
-                                            $where="";
-                                            if ($todas){
-                                                $where .="";
+                                            $where = "";
+                                            if ($todas) {
+                                                $where .= "";
                                             }
-                                            if ($abertas){
-                                                if($where<>""){
-                                                    $where .=" AND pago=FALSE ";
-                                                }else{
-                                                    $where .="  pago=FALSE ";
-                                                }                                                
+                                            if ($abertas) {
+                                                if ($where <> "") {
+                                                    $where .= " AND pago=FALSE ";
+                                                } else {
+                                                    $where .= "  pago=FALSE ";
+                                                }
                                             }
-                                            if ($pagas){
-                                                if($where<>""){
-                                                    $where .=" and pago=TRUE ";
-                                                }else{
-                                                    $where .="  pago=TRUE ";
-                                                }                                                
+                                            if ($pagas) {
+                                                if ($where <> "") {
+                                                    $where .= " and pago=TRUE ";
+                                                } else {
+                                                    $where .= "  pago=TRUE ";
+                                                }
                                             }
-                                            if ($fornecedorID){
-                                                if($where<>""){
-                                                    $where .=" and fornecedor_id=$fornecedorID ";
-                                                }else{
-                                                    $where .="  fornecedor_id=$fornecedorID ";
-                                                }                                                
+                                            if ($fornecedorID) {
+                                                if ($where <> "") {
+                                                    $where .= " and fornecedor_id=$fornecedorID ";
+                                                } else {
+                                                    $where .= "  fornecedor_id=$fornecedorID ";
+                                                }
+                                            }
+                                            if ($ordem){
+                                                if ($where <> "") {
+                                                    $where .= " AND $ordem BETWEEN '$datain' AND '$datafi' ";
+                                                } else {
+                                                    $where .= " $ordem BETWEEN '$datain' AND '$datafi'  ";
+                                                }
                                             }
                                             // VALIDAÇÃO DO PERÍDO, DATA INICIAL NÃO PODE SER MAIRO QUE DATA FINAL
                                             escreve($where);
@@ -148,7 +151,6 @@ require_once './header.php';
                                                     <a class="btn bg-gradient-primary btn-xs" href="./clienteEditar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
                                                 <?php }
                                                 ?>
-
                                                 <a class="btn bg-gradient-danger btn-xs" href="./clienteExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
                                             </td>
                                         </tr>

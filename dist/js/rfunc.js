@@ -1,19 +1,24 @@
 $(document).ready(function () {
-// PRICEFORMAT
+  // PRICEFORMAT
   $('.valor').priceFormat({
     prefix: 'R$ ',
     centsSeparator: ',',
     thousandsSeparator: '.',
     allowNegative: false
-});
-$('.qtde').priceFormat({
+  });
+  $('.qtde').priceFormat({
     prefix: '',
     centsSeparator: ',',
     thousandsSeparator: '.',
     allowNegative: false
-});
-//Date range picker
-$('#reservation').daterangepicker()
+  });
+  //Date range picker
+  $('.data_intervalo').daterangepicker({
+    "locale": {
+      "format": "DD/MM/YYYY", //DATA NO FORMATO DD/MM/AAAA
+      "applyLabel": "Aplicar",
+      "cancelLabel": "Cancelar"}
+  })
   // DATAPICKER
   $('.data').datepicker({
     format: "dd/mm/yyyy",

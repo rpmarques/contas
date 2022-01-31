@@ -1,0 +1,2 @@
+[15:11:22][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[20:31:47][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 

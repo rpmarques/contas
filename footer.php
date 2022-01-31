@@ -23,6 +23,7 @@
 <script src="./plugins/datapicker/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>            
 <!-- date-range-picker -->
 <script src="./plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
