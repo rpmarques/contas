@@ -41,7 +41,7 @@ class CtPag
 
                         $stm->execute();
                         if ($stm) {
-                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE ['.$rOrdem.']');
                         }
                     } else { //DEMAIS PARCELAS
                         $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
@@ -57,7 +57,7 @@ class CtPag
 
                         $stm->execute();
                         if ($stm) {
-                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $rOrdem . ']');
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE ['.$rOrdem.']');
                         }
                     }
                     $auxDataVenc = somaMes(1, $auxDataVenc);
@@ -157,36 +157,16 @@ class CtPag
     public function select($rWhere = '')
     {
         try {
-            $sql = "SELECT * FROM ctpag " . $rWhere;
+            $sql = "SELECT * FROM ctpag ";
+            if ($rWhere) {
+                $sql .= " WHERE $rWhere";
+            }
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);
             return $dados;
         } catch (PDOException $erro) {
             Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
-        }
-    }
-
-    public function montaSelect($rNome = 'cliente_id', $rSelecionado = null)
-    {
-        try {
-            $objClientes = Clientes::getInstance(Conexao::getInstance());
-            $dados = $objClientes->select(" ORDER BY nome");
-            $select = '';
-            $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Selecione um cliente..." style="width: 100%;">'
-                . '<option value="">&nbsp;</option>';
-            foreach ($dados as $linhaDB) {
-                if (!empty($rSelecionado) && $rSelecionado === $linhaDB->id) {
-                    $sAdd = 'selected';
-                } else {
-                    $sAdd = '';
-                }
-                $select .= '<option value="' . $linhaDB->id . '"' . $sAdd . '>' . $linhaDB->id . ' - ' . $linhaDB->nome . '</option>';
-            }
-            $select .= '</select>';
-            return $select;
-        } catch (PDOException $erro) {
-            Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
         }
     }
 }

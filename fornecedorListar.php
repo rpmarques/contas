@@ -31,19 +31,22 @@ require_once './header.php';
                                     $clientes = $objFornecedores->select();
                                     foreach ($clientes as $cli) { ?>
                                         <tr>
-                                            <td><?=$cli->nome;?></td>
-                                            <td><?=$cli->fone1;?></td>
-                                            <td><?=$cli->fone2;?></td>
-                                            <td><?=$cli->email;?></td>
+                                            <td><?= $cli->nome; ?></td>
+                                            <td><?= $cli->fone1; ?></td>
+                                            <td><?= $cli->fone2; ?></td>
+                                            <td><?= $cli->email; ?></td>
                                             <td>
-                                                <a class="btn bg-gradient-primary btn-xs" href="./fornecedorEditar.php?id=<?=base64_encode($cli->id) ?>"><i class="fa fa-edit"></i> Editar </a> 
-                                                <a class="btn bg-gradient-danger btn-xs"  href="./fornecedorExcluir.php?id=<?=base64_encode($cli->id)?>"><i class="fa fa-eraser"></i> Exluir </a>
+                                                <a class="btn bg-gradient-primary btn-xs" href="./fornecedorEditar.php?id=<?= base64_encode($cli->id) ?>"><i class="fa fa-edit"></i> Editar </a>
+                                                <a class="btn bg-gradient-danger btn-xs" href="./fornecedorExcluir.php?id=<?= base64_encode($cli->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
                                             </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
                         </div> <!-- /.card-body -->
+                        <div class="card-footer">
+                            <a href="./fornecedorIncluir.php" class="btn btn-primary btn-sm">Adicionar</a>
+                        </div>
                     </div> <!-- /.card -->
                 </div> <!-- /.col -->
             </div> <!-- /.row -->

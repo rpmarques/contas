@@ -19,7 +19,7 @@ class Clientes
         return self::$cliente;
     }
 
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato,$rCpf)
+    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rCpf)
     {
         try {
             $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato,cpf ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
@@ -100,7 +100,7 @@ class Clientes
     public function pegaCli($rID)
     {
         try {
-            $sql = "SELECT * FROM cliente WHERE id=$rID" ;
+            $sql = "SELECT * FROM cliente WHERE id=$rID";
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -143,6 +143,22 @@ class Clientes
             return $select;
         } catch (PDOException $erro) {
             Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
+        }
+    }
+    public function contaClientes($rCondicao = '')
+    {
+        try {
+            $rSql = "SELECT COUNT(id) AS total FROM cliente ";
+            if ($rCondicao) {
+                $rSql .= " WHERE $rCondicao";
+            }
+            $rSql = "SELECT COUNT(id) AS total FROM cliente " . $rCondicao;
+            $stm = $this->pdo->prepare($rSql);
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_OBJ);
+            return $dados->total;
+        } catch (PDOException $erro) {
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
         }
     }
 }

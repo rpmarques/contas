@@ -178,3 +178,7 @@ function somaMes($rNroMes,$rData){
     }
     return $auXDataVenc;
 }
+
+function abreModal($rModal){    
+    echo "<script type=\"text/javascript\"> $(function(){ $(\"#$rModal\").modal(\"toggle\");}); </script>";
+}

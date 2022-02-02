@@ -144,4 +144,20 @@ class Fornecedores
             Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
         }
     }
+    public function contaFornecedores($rCondicao = '')
+    {
+        try {
+            $rSql = "SELECT COUNT(id) AS total FROM fornec ";
+            if ($rCondicao) {
+                $rSql .= " WHERE $rCondicao";
+            }
+            $rSql = "SELECT COUNT(id) AS total FROM fornec " . $rCondicao;
+            $stm = $this->pdo->prepare($rSql);
+            $stm->execute();
+            $dados = $stm->fetch(PDO::FETCH_OBJ);
+            return $dados->total;
+        } catch (PDOException $erro) {
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
+        }
+    }
 }

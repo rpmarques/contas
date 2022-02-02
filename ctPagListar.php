@@ -57,7 +57,7 @@ require_once './header.php';
                                         <div class="form-group clearfix">
                                             <label>Emissão ou Vencimento</label><br>
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="radioPrimary1" name="ordem" value="data" >
+                                                <input type="radio" id="radioPrimary1" name="ordem" value="datac">
                                                 <label for="radioPrimary1"> Por Emissão</label>
                                             </div>
                                             <br>
@@ -73,92 +73,97 @@ require_once './header.php';
                             </form>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>NroNF</th>
-                                        <th>Série</th>
-                                        <th>Data</th>
-                                        <th>Valor</th>
-                                        <th>Data Venc</th>
-                                        <th>Situação</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    if ($_GET) {
-                                        if (isset($_GET['todas']) || isset($_GET['abertas']) || isset($_GET['pagas']) || ($_GET['fornecedor_id']) <> "" || $_GET['data'] <> "") {
-                                            $todas = isset($_GET['todas']);
-                                            $abertas = isset($_GET['abertas']);
-                                            $pagas = isset($_GET['pagas']);
-                                            $fornecedorID = $_GET['fornecedor_id'] <> "" ? $_GET['fornecedor_id'] : "";
-                                            $data = isset($_GET['data']) <> "" ? $_GET['data'] : "";
-                                            //01/31/2022 - 01/31/2022
-                                            $datain = gravaData(substr($data, 0, 10));
-                                            $datafi = gravaData(substr($data, 13));
-                                            $ordem = isset($_GET['ordem'])?$_GET['ordem']:"";
-                                            //MONTAR O WHERE
-                                            $where = "";
-                                            if ($todas) {
-                                                $where .= "";
-                                            }
-                                            if ($abertas) {
-                                                if ($where <> "") {
-                                                    $where .= " AND pago=FALSE ";
-                                                } else {
-                                                    $where .= "  pago=FALSE ";
-                                                }
-                                            }
-                                            if ($pagas) {
-                                                if ($where <> "") {
-                                                    $where .= " and pago=TRUE ";
-                                                } else {
-                                                    $where .= "  pago=TRUE ";
-                                                }
-                                            }
-                                            if ($fornecedorID) {
-                                                if ($where <> "") {
-                                                    $where .= " and fornecedor_id=$fornecedorID ";
-                                                } else {
-                                                    $where .= "  fornecedor_id=$fornecedorID ";
-                                                }
-                                            }
-                                            if ($ordem){
-                                                if ($where <> "") {
-                                                    $where .= " AND $ordem BETWEEN '$datain' AND '$datafi' ";
-                                                } else {
-                                                    $where .= " $ordem BETWEEN '$datain' AND '$datafi'  ";
-                                                }
-                                            }
-                                            // VALIDAÇÃO DO PERÍDO, DATA INICIAL NÃO PODE SER MAIRO QUE DATA FINAL
-                                            escreve($where);
-                                        }
+                        <?php
+                        $where = "";
+                        if ($_GET) {
+                            if (isset($_GET['todas']) || isset($_GET['abertas']) || isset($_GET['pagas']) || ($_GET['fornecedor_id']) <> "" || $_GET['data'] <> "") {
+                                $todas = isset($_GET['todas']);
+                                $abertas = isset($_GET['abertas']);
+                                $pagas = isset($_GET['pagas']);
+                                $fornecedorID = $_GET['fornecedor_id'] <> "" ? $_GET['fornecedor_id'] : "";
+                                $data = isset($_GET['data']) <> "" ? $_GET['data'] : "";
+                                //01/31/2022 - 01/31/2022
+                                $datain = gravaData(substr($data, 0, 10));
+                                $datafi = gravaData(substr($data, 13));
+                                $ordem = isset($_GET['ordem']) ? $_GET['ordem'] : "";
+                                //MONTAR O WHERE                                
+                                if ($todas) {
+                                    $where .= "";
+                                }
+                                if ($abertas) {
+                                    if ($where <> "") {
+                                        $where .= " AND pago=FALSE ";
+                                    } else {
+                                        $where .= "  pago=FALSE ";
                                     }
-                                    $ctpag = $objContasPagar->select();
-                                    foreach ($ctpag as $ctp) { ?>
+                                }
+                                if ($pagas) {
+                                    if ($where <> "") {
+                                        $where .= " and pago=TRUE ";
+                                    } else {
+                                        $where .= "  pago=TRUE ";
+                                    }
+                                }
+                                if ($fornecedorID) {
+                                    if ($where <> "") {
+                                        $where .= " and fornecedor_id=$fornecedorID ";
+                                    } else {
+                                        $where .= "  fornecedor_id=$fornecedorID ";
+                                    }
+                                }
+                                if ($ordem) {
+                                    if ($where <> "") {
+                                        $where .= " AND $ordem BETWEEN '$datain' AND '$datafi' ";
+                                    } else {
+                                        $where .= " $ordem BETWEEN '$datain' AND '$datafi'  ";
+                                    }
+                                }
+                            }
+                        }
+                        $ctpag = $objContasPagar->select($where);
+                        if ($ctpag) { ?>
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped table-sm">
+                                    <thead>
                                         <tr>
-                                            <td><?= $ctp->nronf; ?></td>
-                                            <td><?= $ctp->serie; ?></td>
-                                            <td><?= formataData($ctp->datac); ?></td>
-                                            <td><?= formataMoeda($ctp->valor); ?></td>
-                                            <td><?= formataData($ctp->data_venc); ?></td>
-                                            <td><?= $ctp->pago == '1' ? 'PAGO' : 'EM ABERTO'; ?></td>
-                                            <td>
-                                                <?php
-                                                if ($ctp->pago <> '1') { ?>
-                                                    <a class="btn bg-gradient-primary btn-xs" href="./clienteEditar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
-                                                <?php }
-                                                ?>
-                                                <a class="btn bg-gradient-danger btn-xs" href="./clienteExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
-                                            </td>
+                                            <th>NroNF</th>
+                                            <th>Série</th>
+                                            <th>Data</th>
+                                            <th>Valor</th>
+                                            <th>Data Venc</th>
+                                            <th>Situação</th>
+                                            <th>Ação</th>
                                         </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div> <!-- /.card-body -->
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($ctpag as $ctp) { ?>
+                                            <tr>
+                                                <td><?= $ctp->nronf; ?></td>
+                                                <td><?= $ctp->serie; ?></td>
+                                                <td><?= formataData($ctp->datac); ?></td>
+                                                <td><?= formataMoeda($ctp->valor); ?></td>
+                                                <td><?= formataData($ctp->data_venc); ?></td>
+                                                <td><?= $ctp->pago == '1' ? 'PAGO' : 'EM ABERTO'; ?></td>
+                                                <td>
+                                                    <?php
+                                                    if ($ctp->pago <> '1') { ?>
+                                                        <a class="btn bg-gradient-primary btn-xs" href="./clienteEditar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
+                                                    <?php }
+                                                    ?>
+                                                    <a class="btn bg-gradient-danger btn-xs" href="./clienteExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div> <!-- /.card-body -->
+                            <div class="card-footer">
+                            <a href="./ctPagIncluir.php" class="btn btn-primary btn-sm">Adicionar</a>
+                        </div>
+                        <?php } ?>
                     </div> <!-- /.card -->
+                    
                 </div> <!-- /.col -->
             </div> <!-- /.row -->
         </div><!-- /.container-fluid -->

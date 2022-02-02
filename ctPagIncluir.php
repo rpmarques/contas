@@ -80,7 +80,7 @@ if ($_POST) {
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label>Valor</label>
+                      <label>Valor da Parcela</label>
                       <input class="form-control form-control-sm valor" name="valor">
                     </div>
                   </div>

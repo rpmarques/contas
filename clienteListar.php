@@ -44,6 +44,9 @@ require_once './header.php';
                                 </tbody>
                             </table>
                         </div> <!-- /.card-body -->
+                        <div class="card-footer">
+                            <a href="./clienteIncluir.php" class="btn btn-primary btn-sm">Adicionar</a>
+                        </div>
                     </div> <!-- /.card -->
                 </div> <!-- /.col -->
             </div> <!-- /.row -->
