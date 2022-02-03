@@ -28,8 +28,8 @@ class CtPag
                     //CALCULO DA DATA DE VENCIMENTO                    
                     if ($i === 1) { //PRIMEIRA PARCELA
                         //AQUI FAZ UM INSERT  
-                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
-                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc,serie) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc,:serie);";
                         $stm = $this->pdo->prepare($rSql);
                         $stm->bindValue(':datac', gravaData($rDatac));
                         $stm->bindValue(':nronf', $rNronf);
@@ -38,14 +38,15 @@ class CtPag
                         $stm->bindValue(':historico', $rHistorico);
                         $stm->bindValue(':ordem', $i);
                         $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+                        $stm->bindValue(':serie', $rSerie);
 
                         $stm->execute();
                         if ($stm) {
                             Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE ['.$rOrdem.']');
                         }
                     } else { //DEMAIS PARCELAS
-                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
-                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                        $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc,serie) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc,:serie);";
                         $stm = $this->pdo->prepare($rSql);
                         $stm->bindValue(':datac', gravaData($rDatac));
                         $stm->bindValue(':nronf', $rNronf);
@@ -54,6 +55,7 @@ class CtPag
                         $stm->bindValue(':historico', $rHistorico);
                         $stm->bindValue(':ordem', $i);
                         $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+                        $stm->bindValue(':serie', $rSerie);
 
                         $stm->execute();
                         if ($stm) {
@@ -64,8 +66,8 @@ class CtPag
                 }
             } else {
                 $rOrdem === '0' ? $rOrdem = '1' : '';
-                $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc) 
-                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc);";
+                $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc,serie) 
+                                 VALUE (:datac,:nronf,:fornecedor_id,:valor,:historico,:ordem,:data_venc,:serie);";
                 $stm = $this->pdo->prepare($rSql);
                 $stm->bindValue(':datac', gravaData($rDatac));
                 $stm->bindValue(':nronf', $rNronf);
@@ -74,6 +76,7 @@ class CtPag
                 $stm->bindValue(':historico', $rHistorico);
                 $stm->bindValue(':ordem', $rOrdem);
                 $stm->bindValue(':data_venc', gravaData($auxDataVenc));
+                $stm->bindValue(':serie', $rSerie);
 
                 $stm->execute();
                 if ($stm) {
@@ -128,23 +131,10 @@ class CtPag
         }
     }
 
-    public function selectUM($rWhere)
+    public function pegaConta($rID)
     {
         try {
-            echo $sql = "SELECT * FROM clientes " . $rWhere;
-            $stm = $this->pdo->prepare($sql);
-            $stm->execute();
-            $dados = $stm->fetch(PDO::FETCH_OBJ);
-            return $dados;
-        } catch (PDOException $erro) {
-            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . '] - SQL:[' . $sql . ']');
-        }
-    }
-
-    public function pegaCli($rID)
-    {
-        try {
-            $sql = "SELECT * FROM cliente WHERE id=$rID";
+            $sql = "SELECT * FROM ctpag WHERE id=$rID";
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -169,4 +159,44 @@ class CtPag
             Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
         }
     }
+
+    public function selectFormaPgto($rWhere = '')
+    {
+        try {
+            $sql = "SELECT * FROM forma_pgto ";
+            if ($rWhere) {
+                $sql .= " WHERE $rWhere";
+            }
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute();
+            $dados = $stm->fetchAll(PDO::FETCH_OBJ);
+            return $dados;
+        } catch (PDOException $erro) {
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
+        }
+    }
+
+    public function montaSelect($rNome = 'fornecedor_id', $rSelecionado = null)
+    {
+        try {
+            $objContasPagar = CtPag::getInstance(Conexao::getInstance());
+            $dados = $objContasPagar->selectFormaPgto();
+            $select = '';
+            $select = '<select class="form-control form-control-sm select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Selecione uma forma de pagamento..." style="width: 100%;">'
+                . '<option value="">&nbsp;</option>';
+            foreach ($dados as $linhaDB) {
+                if (!empty($rSelecionado) && $rSelecionado === $linhaDB->id) {
+                    $sAdd = 'selected';
+                } else {
+                    $sAdd = '';
+                }
+                $select .= '<option value="' . $linhaDB->id . '"' . $sAdd . '>' . $linhaDB->id . ' - ' . $linhaDB->nome . '</option>';
+            }
+            $select .= '</select>';
+            return $select;
+        } catch (PDOException $erro) {
+            Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
+        }
+    }
+
 }

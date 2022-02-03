@@ -1,6 +1,4 @@
-<?php
-require_once './header.php';
-?>
+<?php require_once './header.php'; ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -71,8 +69,7 @@ require_once './header.php';
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
                             </form>
-                        </div>
-                        <!-- /.card-header -->
+                        </div> <!-- /.card-header -->
                         <?php
                         $where = "";
                         if ($_GET) {
@@ -119,9 +116,9 @@ require_once './header.php';
                                     }
                                 }
                             }
+                            $ctpag = $objContasPagar->select($where);
                         }
-                        $ctpag = $objContasPagar->select($where);
-                        if ($ctpag) { ?>
+                        if (isset($ctpag)) { ?>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped table-sm">
                                     <thead>
@@ -148,7 +145,7 @@ require_once './header.php';
                                                 <td>
                                                     <?php
                                                     if ($ctp->pago <> '1') { ?>
-                                                        <a class="btn bg-gradient-primary btn-xs" href="./clienteEditar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
+                                                        <a class="btn bg-gradient-primary btn-xs" href="./ctPagQuitar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
                                                     <?php }
                                                     ?>
                                                     <a class="btn bg-gradient-danger btn-xs" href="./clienteExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
@@ -157,13 +154,13 @@ require_once './header.php';
                                         <?php } ?>
                                     </tbody>
                                 </table>
+                            <?php } ?>
                             </div> <!-- /.card-body -->
                             <div class="card-footer">
-                            <a href="./ctPagIncluir.php" class="btn btn-primary btn-sm">Adicionar</a>
-                        </div>
-                        <?php } ?>
+                                <a href="./fornecedorIncluir.php" class="btn btn-primary btn-sm">Cadastrar Fornecedor</a>
+                                <a href="./ctPagIncluir.php" class="btn btn-primary btn-sm">Incluir Conta</a>
+                            </div>
                     </div> <!-- /.card -->
-                    
                 </div> <!-- /.col -->
             </div> <!-- /.row -->
         </div><!-- /.container-fluid -->

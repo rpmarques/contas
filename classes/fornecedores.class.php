@@ -144,6 +144,7 @@ class Fornecedores
             Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
         }
     }
+    
     public function contaFornecedores($rCondicao = '')
     {
         try {
