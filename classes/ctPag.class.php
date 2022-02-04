@@ -42,7 +42,7 @@ class CtPag
 
                         $stm->execute();
                         if ($stm) {
-                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE ['.$rOrdem.']');
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE [' . $rOrdem . ']');
                         }
                     } else { //DEMAIS PARCELAS
                         $rSql = "INSERT INTO ctpag (datac,nronf,fornecedor_id,valor,historico,ordem,data_venc,serie) 
@@ -59,7 +59,7 @@ class CtPag
 
                         $stm->execute();
                         if ($stm) {
-                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE ['.$rOrdem.']');
+                            Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CTPAG NRONF:[' . $rNronf . '], SERIE:[' . $rSerie . '],PARCELA:[' . $i . '] DE [' . $rOrdem . ']');
                         }
                     }
                     $auxDataVenc = somaMes(1, $auxDataVenc);
@@ -131,6 +131,30 @@ class CtPag
         }
     }
 
+    public function quitar($rID, $rNroNF, $rSerie, $rValor,$rOrdem,$rFormaPgto,$rDataP)
+    {
+        try {
+            $sql = "UPDATE ctpag SET 
+            pago=1,datap=:datap,forma_pgto_id=:forma_pgto_id,valor_pago=:valor_pago
+            WHERE id=:id; AND nronf=:nronf AND serie=:serie AND ordem=:ordem ";
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindValue(':id', $rID);
+            $stm->bindValue(':nronf', $rNroNF);
+            $stm->bindValue(':serie', $rSerie);
+            $stm->bindValue(':valor_pago', $rValor);
+            $stm->bindValue(':ordem', $rOrdem);
+            $stm->bindValue(':forma_pgto_id', $rFormaPgto);
+            $stm->bindValue(':datap', gravaData($rDataP));
+            $stm->execute();
+            if ($stm) {
+                Logger('Usuario:[' . $_SESSION['login'] . '] - QUITOU CONTA Nro:[' . $rNroNF . '], SERIE:[' . $rSerie . '], PARCELA:[' . $rOrdem . ']');
+            }
+            return $stm;
+        } catch (PDOException $erro) {
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . '] - SQL:[' . $sql . ']');
+        }
+    }
+
     public function pegaConta($rID)
     {
         try {
@@ -163,10 +187,7 @@ class CtPag
     public function selectFormaPgto($rWhere = '')
     {
         try {
-            $sql = "SELECT * FROM forma_pgto ";
-            if ($rWhere) {
-                $sql .= " WHERE $rWhere";
-            }
+            $sql = "SELECT * FROM forma_pgto " . $rWhere;
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             $dados = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -176,7 +197,7 @@ class CtPag
         }
     }
 
-    public function montaSelect($rNome = 'fornecedor_id', $rSelecionado = null)
+    public function montaSelect($rNome = 'forma_pgto_id', $rSelecionado = null)
     {
         try {
             $objContasPagar = CtPag::getInstance(Conexao::getInstance());
@@ -198,5 +219,4 @@ class CtPag
             Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
         }
     }
-
 }
