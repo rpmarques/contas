@@ -17,7 +17,7 @@ class CtPag
         endif;
         return self::$ctpgag;
     }
-    
+
     public function incluirConta($rNronf, $rSerie, $rDatac, $rFornecedorID, $rValor, $rHistorico, $rOrdem, $rDataVenc)
     {
         try {
@@ -131,7 +131,7 @@ class CtPag
         }
     }
 
-    public function quitar($rID, $rNroNF, $rSerie, $rValor,$rOrdem,$rFormaPgto,$rDataP)
+    public function quitar($rID, $rNroNF, $rSerie, $rValor, $rOrdem, $rFormaPgto, $rDataP)
     {
         try {
             $sql = "UPDATE ctpag SET 
@@ -148,6 +148,27 @@ class CtPag
             $stm->execute();
             if ($stm) {
                 Logger('Usuario:[' . $_SESSION['login'] . '] - QUITOU CONTA Nro:[' . $rNroNF . '], SERIE:[' . $rSerie . '], PARCELA:[' . $rOrdem . ']');
+            }
+            return $stm;
+        } catch (PDOException $erro) {
+            Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . '] - SQL:[' . $sql . ']');
+        }
+    }
+
+    public function excluirQuitacao($rID, $rNroNF, $rSerie, $rOrdem)
+    {
+        try {
+            $sql = "UPDATE ctpag SET 
+            pago=0,datap='',forma_pgto_id='',valor_pago=0
+            WHERE id=:id; AND nronf=:nronf AND serie=:serie AND ordem=:ordem ";
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindValue(':id', $rID);
+            $stm->bindValue(':nronf', $rNroNF);
+            $stm->bindValue(':serie', $rSerie);
+            $stm->bindValue(':ordem', $rOrdem);
+            $stm->execute();
+            if ($stm) {
+                Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU A QUITAÇÃO DA CONTA Nro:[' . $rNroNF . '], SERIE:[' . $rSerie . '], PARCELA:[' . $rOrdem . ']');
             }
             return $stm;
         } catch (PDOException $erro) {

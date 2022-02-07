@@ -10,8 +10,13 @@ if ($_GET && isset($_GET['id'])) {
 }
 if ($_POST && isset($_POST['id'])) {
   $id = $_POST['id'];
-  $ret = $objContasPagar->delete($id);
-  $ctpag = $objContasPagar->pegaConta($_POST['id']);
+  $ctpag = $objContasPagar->pegaConta($id);
+  $nronf = $ctpag->nronf;
+  $serie = $ctpag->serie;
+  $ordem = $ctpag->ordem;
+  $ret = $objContasPagar->excluirQuitacao($id, $nronf, $serie, $ordem);
+  $ctpag = $objContasPagar->pegaConta($id);
+  
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -38,7 +43,7 @@ if ($_POST && isset($_POST['id'])) {
           if (!empty($ctpag)) { ?>
             <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">Exclusão de Conta - Nro:<?= $ctpag->nronf ?> - Série:<?= $ctpag->serie ?> - Parcela:<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?></h3>
+                <h3 class="card-title">Exclusão de Quitação da Conta - Nro:<?= $ctpag->nronf ?> - Série:<?= $ctpag->serie ?> - Parcela:<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?></h3>
               </div> <!-- /.card-header -->
               <!-- form start -->
               <form method="post">
@@ -100,19 +105,19 @@ if ($_POST && isset($_POST['id'])) {
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Forma de Pgto</label>
-                        <?=$objContasPagar->montaSelect('forma_pgto_id');?>
+                        <?=$objContasPagar->montaSelect('forma_pgto_id',$ctpag->forma_pgto_id);?>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Data Pgto.</label>
-                        <input type="text" class="form-control form-control-sm data" name="datap" value="<?php echo date('d/m/Y') ?>">
+                        <input type="text" class="form-control form-control-sm data" name="datap" value="<?=formataData($ctpag->datap); ?>">
                       </div>
                     </div>
                   </div>
                 </div> <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-danger">Quitar</button>
+                  <button type="submit" class="btn btn-danger">Excluir Quitação</button>
                 </div>
               </form>
             </div> <!-- /.card -->
