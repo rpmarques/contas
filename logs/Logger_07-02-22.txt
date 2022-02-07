@@ -1,0 +1,11 @@
+[19:26:45][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[20:08:55][::1]-> Usuario:[Ricardo] - EXCLUIU CLIENTE - ID:[45] 
+[20:10:08][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[45] 
+[20:10:28][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\fornecedores.class.php] - LINHA:[104] - Mensagem:[SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1] - SQL:[SELECT * FROM fornec WHERE id=] 
+[20:10:28][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[45] 
+[20:12:19][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\fornecedores.class.php] - LINHA:[104] - Mensagem:[SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1] - SQL:[SELECT * FROM fornec WHERE id=] 
+[20:12:19][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[45] 
+[20:12:41][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[45] 
+[20:13:36][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[46] 
+[20:13:52][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[69] 
+[20:13:59][::1]-> Usuario:[Ricardo] - EXCLUIU CTPAG - ID:[68] 

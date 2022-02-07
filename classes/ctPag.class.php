@@ -17,7 +17,7 @@ class CtPag
         endif;
         return self::$ctpgag;
     }
-    //public function incluirConta($rDatac,$rOrdem,$rDataVenc)
+    
     public function incluirConta($rNronf, $rSerie, $rDatac, $rFornecedorID, $rValor, $rHistorico, $rOrdem, $rDataVenc)
     {
         try {
@@ -93,12 +93,12 @@ class CtPag
     {
         if (!empty($rId)) :
             try {
-                $sql = "DELETE FROM cliente WHERE id=:id";
+                $sql = "DELETE FROM ctpag WHERE id=:id";
                 $stm = $this->pdo->prepare($sql);
                 $stm->bindValue(':id', $rId);
                 $stm->execute();
                 if ($stm) {
-                    Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU CLIENTE - ID:[' . $rId . ']');
+                    Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU CTPAG - ID:[' . $rId . ']');
                 }
                 return $stm;
             } catch (PDOException $erro) {

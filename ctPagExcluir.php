@@ -3,20 +3,15 @@ require_once './header.php';
 $ok = "false";
 if ($_GET && isset($_GET['id'])) {
   $id = base64_decode($_GET['id']);
-  $ctpag = $objContasPagar->pegaConta($id);
-  $fornec = $objFornecedores->pegaFornec($ctpag->fornecedor_id);
+  if ($ctpag = $objContasPagar->pegaConta($id)){
+    $fornec = $objFornecedores->pegaFornec($ctpag->fornecedor_id);
+  }
+  
 }
 if ($_POST && isset($_POST['id'])) {
   $id = $_POST['id'];
+  $ret = $objContasPagar->delete($id);
   $ctpag = $objContasPagar->pegaConta($_POST['id']);
-  $nronf = $ctpag->nronf;
-  $serie = $ctpag->serie;
-  $valor = $ctpag->valor;
-  $ordem = $ctpag->ordem;
-  $formaPgto = $_POST['forma_pgto_id'];
-  $datap = $_POST['datap'];
-
-  $ret = $objContasPagar->quitar($id, $nronf, $serie, $valor, $ordem, $formaPgto, $datap);
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -40,10 +35,10 @@ if ($_POST && isset($_POST['id'])) {
           ?>
           <!-- general form elements -->
           <?php
-          if ($ok == "false") { ?>
-            <div class="card card-primary">
+          if (!empty($ctpag)) { ?>
+            <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">Quitação de Conta - Nro:<?= $ctpag->nronf ?> - Série:<?= $ctpag->serie ?> - Parcela:<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?></h3>
+                <h3 class="card-title">Exclusão de Conta - Nro:<?= $ctpag->nronf ?> - Série:<?= $ctpag->serie ?> - Parcela:<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?></h3>
               </div> <!-- /.card-header -->
               <!-- form start -->
               <form method="post">
@@ -117,7 +112,7 @@ if ($_POST && isset($_POST['id'])) {
                   </div>
                 </div> <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Quitar</button>
+                  <button type="submit" class="btn btn-danger">Quitar</button>
                 </div>
               </form>
             </div> <!-- /.card -->

@@ -146,9 +146,11 @@
                                                     <?php
                                                     if ($ctp->pago <> '1') { ?>
                                                         <a class="btn bg-gradient-primary btn-xs" href="./ctPagQuitar.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Quitar </a>
+                                                    <?php }else{ ?>
+                                                        <a class="btn bg-gradient-primary btn-xs" href="./ctPagExcluirQuitacao.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-edit"></i> Excluir Quitação </a>
                                                     <?php }
                                                     ?>
-                                                    <a class="btn bg-gradient-danger btn-xs" href="./clienteExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir </a>
+                                                    <a class="btn bg-gradient-danger btn-xs" href="./ctPagExcluir.php?id=<?= base64_encode($ctp->id) ?>"><i class="fa fa-eraser"></i> Exluir Conta </a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
