@@ -1,0 +1,3 @@
+[14:45:42][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[14:47:45][::1]-> Usuario:[Ricardo] - EXCLUIU A QUITAÇÃO DA CONTA Nro:[1111111], SERIE:[], PARCELA:[8] 
+[14:47:45][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\ctPag.class.php] - LINHA:[184] - Mensagem:[SQLSTATE[HY000]: General error: 2014 Cannot execute queries while there are pending result sets. Consider unsetting the previous PDOStatement or calling PDOStatement::closeCursor()] - SQL:[SELECT * FROM ctpag WHERE id=52] 

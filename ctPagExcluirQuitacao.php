@@ -15,8 +15,7 @@ if ($_POST && isset($_POST['id'])) {
   $serie = $ctpag->serie;
   $ordem = $ctpag->ordem;
   $ret = $objContasPagar->excluirQuitacao($id, $nronf, $serie, $ordem);
-  $ctpag = $objContasPagar->pegaConta($id);
-  
+  $ctpag = $objContasPagar->pegaConta($id);  
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
