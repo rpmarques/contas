@@ -2,6 +2,8 @@
 //DEIXO SOMENTE APARECENDO OS ERROS CRÍTICOS
 //error_reporting(E_ERROR|E_PARSE);
 // REPORTA TODOS OS ERROS E AVISOS
+define('PU_versao','0.5');
+define('PU_ambiente','W'); // L=>LOCALHOST, W=>WEB
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 require_once './classes/funcoes.class.php';
@@ -21,8 +23,6 @@ if (isset($_POST['email'])){
             $_SESSION['login'] = $usuarios->nome;
             Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
             header('Location: principal.php');
-    }else{
-        escreve("não");
     }    
 }
 ?>
@@ -47,7 +47,7 @@ if (isset($_POST['email'])){
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="./index.php" class="h1"><b>Contas </b>0.00</a>
+                <a href="./index.php" class="h1"><b>Contas </b>0.50</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Faça seu login para acessar</p>
