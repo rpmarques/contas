@@ -2,8 +2,6 @@
 //DEIXO SOMENTE APARECENDO OS ERROS CRÍTICOS
 //error_reporting(E_ERROR|E_PARSE);
 // REPORTA TODOS OS ERROS E AVISOS
-define('PU_versao','0.5');
-define('PU_ambiente','W'); // L=>LOCALHOST, W=>WEB
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 require_once './classes/funcoes.class.php';
@@ -20,6 +18,7 @@ if (isset($_POST['email'])){
     
     if (!empty($usuarios)){
             session_start();
+            $_SESSION['versao'] = '0.50';
             $_SESSION['login'] = $usuarios->nome;
             Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
             header('Location: principal.php');

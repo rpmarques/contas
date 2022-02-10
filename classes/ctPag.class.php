@@ -159,7 +159,7 @@ class CtPag
     {
         try {
             $sql = "UPDATE ctpag SET 
-            pago=0,datap='',forma_pgto_id='',valor_pago=0
+            pago=0,datap=NULL,forma_pgto_id=NULL,valor_pago=0
             WHERE id=:id; AND nronf=:nronf AND serie=:serie AND ordem=:ordem ";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':id', $rID);

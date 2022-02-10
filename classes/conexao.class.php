@@ -14,7 +14,8 @@ class Conexao
    {
       if (!isset(self::$pdo)) {
          try {
-            if (PU_ambiente == 'W') {
+            $PU_ambiente ="L"; // L=>LOCALHOST, W=>WEB
+            if ($PU_ambiente == 'W') {
                $servername = "sql105.epizy.com";
                $database = "epiz_30837212_contas";
                $charset = "utf8";
