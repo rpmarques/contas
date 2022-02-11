@@ -3,20 +3,15 @@ require_once './header.php';
 $ok = "false";
 if ($_GET && isset($_GET['id'])) {
   $id = base64_decode($_GET['id']);
-  $ctpag = $objContasPagar->pegaConta($id);
-  $fornec = $objFornecedores->pegaFornec($ctpag->fornecedor_id);
+  if ($ctrec = $objContasReceber->pegaConta($id)){
+    $cliente = $objClientes->pegaCli($ctrec->cliente_id);
+  }
+  
 }
 if ($_POST && isset($_POST['id'])) {
   $id = $_POST['id'];
-  $ctpag = $objContasPagar->pegaConta($_POST['id']);
-  $nronf = $ctpag->nronf;
-  $serie = $ctpag->serie;
-  $valor = $ctpag->valor;
-  $ordem = $ctpag->ordem;
-  $formaPgto = $_POST['forma_pgto_id'];
-  $datap = $_POST['datap'];
-
-  $ret = $objContasPagar->quitar($id, $nronf, $serie, $valor, $ordem, $formaPgto, $datap);
+  $ret = $objContasReceber->delete($id);
+  $ctrec = $objContasReceber->pegaConta($_POST['id']);
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -32,7 +27,7 @@ if ($_POST && isset($_POST['id'])) {
           if (isset($ret)) {
             if ($ret) {
               $ok = "true";
-              require_once './alertaSucessoQuitacaoCtPag.php';
+              require_once './alertaSucesso.php';
             } else {
               require_once './alertaErro.php';
             }
@@ -40,62 +35,62 @@ if ($_POST && isset($_POST['id'])) {
           ?>
           <!-- general form elements -->
           <?php
-          if ($ok == "false") { ?>
-            <div class="card card-primary">
+          if (!empty($ctrec)) { ?>
+            <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">Quitação de Conta - Nro:<?= $ctpag->nronf ?> - Série:<?= $ctpag->serie ?> - Parcela:<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?></h3>
+                <h3 class="card-title">Exclusão de Conta - Nro:<?= $ctrec->nronf ?> - Série:<?= $ctrec->serie ?> - Parcela:<?= $ctrec->ordem . "/" . $ctrec->total_ordem ?></h3>
               </div> <!-- /.card-header -->
               <!-- form start -->
               <form method="post">
-                <input type="hidden" name="id" value="<?= $ctpag->id ?>">
+                <input type="hidden" name="id" value="<?= $ctrec->id ?>">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Nro NF</label>
-                        <input type="text" class="form-control form-control-sm" disabled name="nronf" value="<?= $ctpag->nronf ?>">
+                        <input type="text" class="form-control form-control-sm" disabled name="nronf" value="<?= $ctrec->nronf ?>">
                       </div>
                     </div>
                     <div class="col-md-1">
                       <div class="form-group">
                         <label>Série</label>
-                        <input type="text" class="form-control form-control-sm " disabled name="serie" value="<?= $ctpag->serie ?>">
+                        <input type="text" class="form-control form-control-sm " disabled name="serie" value="<?= $ctrec->serie ?>">
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Data</label>
-                        <input type="text" class="form-control form-control-sm data" disabled name="datac" value="<?= formataData($ctpag->datac) ?>">
+                        <input type="text" class="form-control form-control-sm data" disabled name="datac" value="<?= formataData($ctrec->datac) ?>">
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Data Venc.</label>
-                        <input type="text" class="form-control form-control-sm data" disabled name="data_venc" value="<?= formataData($ctpag->data_venc) ?>">
+                        <input type="text" class="form-control form-control-sm data" disabled name="data_venc" value="<?= formataData($ctrec->data_venc) ?>">
                       </div>
                     </div>
                     <div class="col-md-5">
                       <div class="form-group">
-                        <label>Fornecedor</label>
-                        <input class="form-control form-control-sm" type="text" disabled value="<?= $ctpag->fornecedor_id . " - " . $fornec->nome; ?>">
+                        <label>ctrecornecedor</label>
+                        <cliente class="form-control form-control-sm" type="text" disabled value="<?= $ctrec->cliente_id . " - " . $fornec->nome; ?>">
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Valor da Parcela</label>
-                        <input class="form-control form-control-sm valor" name="valor" disabled value="<?= $ctpag->valor ?>" disabled>
+                        <input class="form-control form-control-sm valor" name="valor" disabled value="<?= $ctrec->valor ?>" disabled>
                       </div>
                     </div>
                     <div class="col-md-1">
                       <div class="form-group">
                         <label>Parcela</label>
-                        <input class="form-control form-control-sm " type="text" name="ordem" disabled value="<?= $ctpag->ordem . "/" . $ctpag->total_ordem ?>">
+                        <input class="form-control form-control-sm " type="text" name="ordem" disabled value="<?= $ctrec->ordem . "/" . $ctrec->total_ordem ?>">
                       </div>
                     </div>
                     <div class="col-md-7">
                       <div class="form-group">
                         <label>Histórico</label>
-                        <input class="form-control form-control-sm " name="historico" disabled type="text" value="<?= $ctpag->historico ?>">
+                        <input class="form-control form-control-sm " name="historico" disabled type="text" value="<?= $ctrec->historico ?>">
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -117,7 +112,7 @@ if ($_POST && isset($_POST['id'])) {
                   </div>
                 </div> <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Quitar</button>
+                  <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>
               </form>
             </div> <!-- /.card -->

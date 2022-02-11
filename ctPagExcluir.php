@@ -112,7 +112,7 @@ if ($_POST && isset($_POST['id'])) {
                   </div>
                 </div> <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-danger">Quitar</button>
+                  <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>
               </form>
             </div> <!-- /.card -->

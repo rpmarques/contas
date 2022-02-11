@@ -1,9 +1,9 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> <?=$_SESSION['versao'];?>
+      <b>Versão</b> <?=$_SESSION['versao'];?>
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 <a href="#">Contas</a>.</strong> Contas a Pagar e Receber.
   </footer>
 
   <!-- Control Sidebar -->

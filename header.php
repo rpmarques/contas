@@ -9,6 +9,8 @@ require_once './classes/fornecedores.class.php';
 $objFornecedores = Fornecedores::getInstance(Conexao::getInstance());
 require_once './classes/ctPag.class.php';
 $objContasPagar = CtPag::getInstance(Conexao::getInstance());
+require_once './classes/ctRec.class.php';
+$objContasReceber = CtRec::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');
