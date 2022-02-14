@@ -11,6 +11,8 @@ require_once './classes/ctPag.class.php';
 $objContasPagar = CtPag::getInstance(Conexao::getInstance());
 require_once './classes/ctRec.class.php';
 $objContasReceber = CtRec::getInstance(Conexao::getInstance());
+require_once './classes/formaPgto.class.php';
+$objFormaPgto = formaPgto::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');

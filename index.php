@@ -18,7 +18,7 @@ if (isset($_POST['email'])){
     
     if (!empty($usuarios)){
             session_start();
-            $_SESSION['versao'] = '0.50';
+            $_SESSION['versao'] = '1.00';
             $_SESSION['login'] = $usuarios->nome;
             Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
             header('Location: principal.php');
@@ -46,7 +46,7 @@ if (isset($_POST['email'])){
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="./index.php" class="h1"><b>Contas </b>0.50</a>
+                <a href="./index.php" class="h1"><b>Contas </b>1.00</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Faça seu login para acessar</p>
