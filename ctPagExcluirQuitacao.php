@@ -1,12 +1,11 @@
 <?php
 require_once './header.php';
-$ok = "false";
+
 if ($_GET && isset($_GET['id'])) {
   $id = base64_decode($_GET['id']);
-  if ($ctpag = $objContasPagar->pegaConta($id)){
+  if ($ctpag = $objContasPagar->pegaConta($id)) {
     $fornec = $objFornecedores->pegaFornec($ctpag->fornecedor_id);
   }
-  
 }
 if ($_POST && isset($_POST['id'])) {
   $id = $_POST['id'];
@@ -15,7 +14,7 @@ if ($_POST && isset($_POST['id'])) {
   $serie = $ctpag->serie;
   $ordem = $ctpag->ordem;
   $ret = $objContasPagar->excluirQuitacao($id, $nronf, $serie, $ordem);
-  $ctpag = $objContasPagar->pegaConta($id);  
+  $ctpag = $objContasPagar->pegaConta($id);
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -30,7 +29,6 @@ if ($_POST && isset($_POST['id'])) {
           <?php
           if (isset($ret)) {
             if ($ret) {
-              $ok = "true";
               require_once './alertaSucesso.php';
             } else {
               require_once './alertaErro.php';
@@ -104,13 +102,13 @@ if ($_POST && isset($_POST['id'])) {
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Forma de Pgto</label>
-                        <?=$objContasPagar->montaSelect('forma_pgto_id',$ctpag->forma_pgto_id);?>
+                        <?= $objFormaPgto->montaSelect('forma_pgto_id', $ctpag->forma_pgto_id); ?>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>Data Pgto.</label>
-                        <input type="text" class="form-control form-control-sm data" name="datap" value="<?=formataData($ctpag->datap); ?>">
+                        <input type="text" class="form-control form-control-sm data" name="datap" value="<?= formataData($ctpag->datap); ?>">
                       </div>
                     </div>
                   </div>

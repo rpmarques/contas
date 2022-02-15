@@ -105,7 +105,7 @@ if ($_POST && isset($_POST['id'])) {
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Forma de Pgto</label>
-                        <?=$objContasPagar->montaSelect('forma_pgto_id');?>
+                        <?= $objFormaPgto->montaSelect('forma_pgto_id'); ?>
                       </div>
                     </div>
                     <div class="col-md-2">

@@ -20,6 +20,7 @@ if (!isset($_SESSION['login'])) {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,11 +35,10 @@ if (!isset($_SESSION['login'])) {
   <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Datepicker -->
   <link href="./plugins/datapicker/css/bootstrap-datepicker3.min.css" rel="stylesheet">
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="./plugins/daterangepicker/daterangepicker.css">
-      <!-- iCheck for checkboxes and radio inputs -->
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="./plugins/daterangepicker/daterangepicker.css">
+  <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    
   <!-- Select2 -->
   <link rel="stylesheet" href="./plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
