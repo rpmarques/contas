@@ -9,7 +9,7 @@ if ($_POST) {
     $email = $_POST['email'];
     $contato = '';
     $cpf = $_POST['cpf'];
-    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email,$contato, $cpf);
+    $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato, $cpf);
   }
 }
 ?>
@@ -43,19 +43,19 @@ if ($_POST) {
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Nome</label>
-                      <input type="text" class="form-control form-control-sm" name="nome" >
+                      <input type="text" class="form-control form-control-sm" name="nome">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>CNPJ</label>
-                      <input type="text" class="form-control form-control-sm cnpj" name="cnpj" data-inputmask='"mask": "99.999.999/9999-99"' data-mask >                     
+                      <input type="text" class="form-control form-control-sm cnpj" name="cnpj" data-inputmask='"mask": "99.999.999/9999-99"' data-mask>
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>CPF</label>
-                      <input class="form-control form-control-sm cpf" name="cpf" data-inputmask='"mask": "999.999.999-99"' data-mask>
+                      <input class="form-control form-control-sm cpf" id="cpf" name="cpf" data-inputmask='"mask": "999.999.999-99"' data-mask>
                     </div>
                   </div>
                   <div class="col-md-3">

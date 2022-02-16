@@ -1,14 +1,14 @@
+<footer class="main-footer">
+  <div class="float-right d-none d-sm-block">
+    <b>Versão</b> <?= $_SESSION['versao']; ?>
+  </div>
+  <strong>Copyright &copy; 2021 <a href="#">Contas</a>.</strong> Contas a Pagar e Receber.
+</footer>
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Versão</b> <?=$_SESSION['versao'];?>
-    </div>
-    <strong>Copyright &copy; 2021 <a href="#">Contas</a>.</strong> Contas a Pagar e Receber.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark"> <!-- Control sidebar content goes here -->
-  </aside>   <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside> <!-- /.control-sidebar -->
 </div> <!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -20,7 +20,7 @@
 <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- Datepicker -->
 <script src="./plugins/datapicker/js/bootstrap-datepicker.js"> </script>
-<script src="./plugins/datapicker/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>            
+<script src="./plugins/datapicker/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
 <!-- date-range-picker -->
 <script src="./plugins/daterangepicker/daterangepicker.js"></script>
 
@@ -46,6 +46,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="./dist/js/demo.js"></script>
 <!-- Page specific script -->
+<script src="./dist/js/validaCpfCnpj.js"></script>
 <script src="./dist/js/rfunc.js"></script>
+
 </body>
+
 </html>

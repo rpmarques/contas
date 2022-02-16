@@ -10,23 +10,24 @@ require_once './classes/conexao.class.php';
 require_once './classes/usuarios.class.php';
 $objUsuarios = Usuarios::getInstance(Conexao::getInstance());
 
-if (isset($_POST['email'])){
+if (isset($_POST['email'])) {
     $wEmail = $_POST['email'];
-    define('LOGIN',$wEmail);
+    define('LOGIN', $wEmail);
     $wSenha = md5($_POST['senha']);
     $usuarios = $objUsuarios->selectUM(" WHERE TRIM(email)='$wEmail' AND TRIM(senha)='$wSenha' ");
-    
-    if (!empty($usuarios)){
-            session_start();
-            $_SESSION['versao'] = '1.00';
-            $_SESSION['login'] = $usuarios->nome;
-            Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
-            header('Location: principal.php');
-    }    
+
+    if (!empty($usuarios)) {
+        session_start();
+        $_SESSION['versao'] = '1.00';
+        $_SESSION['login'] = $usuarios->nome;
+        Logger('USUARIO:[' . $_SESSION['login'] . '] - LOGOU NO SISTEMA');
+        header('Location: principal.php');
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +51,6 @@ if (isset($_POST['email'])){
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Faça seu login para acessar</p>
-
                 <form action="" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="exemplo@exemplo.com">
@@ -81,8 +81,7 @@ if (isset($_POST['email'])){
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </div>
-                        <!-- /.col -->
+                        </div> <!-- /.col -->
                     </div>
                 </form>
                 <p class="mb-1">
@@ -91,12 +90,9 @@ if (isset($_POST['email'])){
                 <p class="mb-0">
                     <a href="./registrar.php" class="text-center">Faça seu registro</a>
                 </p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.login-box -->
+            </div> <!-- /.card-body -->
+        </div> <!-- /.card -->
+    </div> <!-- /.login-box -->
 
     <!-- jQuery -->
     <script src="./plugins/jquery/jquery.min.js"></script>

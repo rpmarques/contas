@@ -17,7 +17,8 @@ $(document).ready(function () {
     "locale": {
       "format": "DD/MM/YYYY", //DATA NO FORMATO DD/MM/AAAA
       "applyLabel": "Aplicar",
-      "cancelLabel": "Cancelar"}
+      "cancelLabel": "Cancelar"
+    }
   })
   // DATAPICKER
   $('.data').datepicker({
@@ -50,3 +51,34 @@ $(document).ready(function () {
 
 });
 
+
+$(function () {
+
+  $('.cnpj').blur(function () {
+    var cnpj = $('.cnpj').val();
+    console.log("cnpj");
+    if (!cnpj) {
+      if (!valida_cpf_cnpj(cnpj)) {
+        alert('CNPJ  inválido!');
+      }
+    }
+    return;
+  }); //FIM CNPJ
+
+  // Aciona a validação ao sair do input
+  $('.cpf').blur(function () {
+    // O CPF ou CNPJ
+    var cpf = $('.cpf').val();
+    console.log("cpf");
+    // Testa a validação
+    if (!cpf) {
+      if (!valida_cpf_cnpj(cpf)) {
+        alert('CPF  inválido!');
+      }
+    }
+    return;
+  }); //FIM CPF
+  return;
+
+
+});
