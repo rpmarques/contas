@@ -44,6 +44,7 @@ if (!isset($_SESSION['login'])) {
   <link rel="stylesheet" href="./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini">

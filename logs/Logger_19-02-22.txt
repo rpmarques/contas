@@ -1,0 +1,9 @@
+[14:48:20][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[15:39:46][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[34] - Mensagem:[SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens] 
+[15:39:57][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[34] - Mensagem:[SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens] 
+[15:40:23][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\contas\classes\clientes.class.php] - LINHA:[34] - Mensagem:[SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens] 
+[15:40:55][::1]-> USUARIO:[Ricardo] - INSERIU CLIENTE 
+[15:42:24][::1]-> Usuario:[Ricardo] - ALTEROU CLIENTE - ID:[10] 
+[15:43:02][::1]-> Usuario:[Ricardo] - ALTEROU CLIENTE - ID:[10] 
+[15:43:41][::1]-> USUARIO:[Ricardo] - INSERIU CLIENTE 
+[15:45:19][::1]-> Usuario:[Ricardo] - EXCLUIU CLIENTE - ID:[11] 

@@ -19,10 +19,10 @@ class Clientes
         return self::$cliente;
     }
 
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rCpf)
+    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato)
     {
         try {
-            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato,cpf ) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
+            $rSql = "INSERT INTO cliente (nome,cnpj,fone1,fone2,email,contato) VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -30,8 +30,6 @@ class Clientes
             $stm->bindValue(':fone2', $rFone2);
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
-            $stm->bindValue(':cpf', $rCpf);
-
             $stm->execute();
             if ($stm) {
                 Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU CLIENTE');
@@ -60,11 +58,10 @@ class Clientes
         endif;
     }
 
-    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId, $rCpf)
+    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId)
     {
         try {
-            $sql = "UPDATE cliente SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email,contato=:contato, 
-                     cpf=:cpf WHERE id=:id;";
+            $sql = "UPDATE cliente SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email,contato=:contato WHERE id=:id;";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -73,7 +70,6 @@ class Clientes
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
             $stm->bindValue(':id', $rId);
-            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU CLIENTE - ID:[' . $rId . ']');

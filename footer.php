@@ -23,7 +23,6 @@
 <script src="./plugins/datapicker/locales/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
 <!-- date-range-picker -->
 <script src="./plugins/daterangepicker/daterangepicker.js"></script>
-
 <!-- DataTables  & Plugins -->
 <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -41,6 +40,8 @@
 <script src="./plugins/select2/js/select2.full.min.js"></script>
 <script src="./plugins/select2/js/i18n/pt-BR.js"></script>
 <script src="./dist/js/priceformat/jquery.priceformat.js"></script>
+<!-- jQuery Mask Plugin  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- AdminLTE App -->
 <script src="./dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
