@@ -19,11 +19,11 @@ class Fornecedores
         return self::$fornecedor;
     }
 
-    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato,$rCpf)
+    public function insert($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato)
     {
         try {
-            $rSql = "INSERT INTO fornec (nome,cnpj,fone1,fone2,email,contato,cpf)
-                     VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato,:cpf);";
+            $rSql = "INSERT INTO fornec (nome,cnpj,fone1,fone2,email,contato)
+                     VALUES (:nome,:cnpj,:fone1,:fone2,:email,:contato);";
             $stm = $this->pdo->prepare($rSql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -31,7 +31,6 @@ class Fornecedores
             $stm->bindValue(':fone2', $rFone2);
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
-            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('USUARIO:[' . $_SESSION['login'] . '] - INSERIU FORNECEDOR');
@@ -60,11 +59,10 @@ class Fornecedores
         endif;
     }
 
-    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId,$rCpf)
+    public function update($rNome, $rCnpj, $rFone1, $rFone2, $rEmail, $rContato, $rId)
     {
         try {
-            $sql = "UPDATE fornec SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email, contato=:contato,
-                    cpf=:cpf WHERE id=:id;";
+            $sql = "UPDATE fornec SET nome=:nome,cnpj=:cnpj,fone1=:fone1,fone2=:fone2,email=:email, contato=:contato WHERE id=:id;";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':nome', $rNome);
             $stm->bindValue(':cnpj', $rCnpj);
@@ -73,7 +71,6 @@ class Fornecedores
             $stm->bindValue(':email', strtolower($rEmail));
             $stm->bindValue(':contato', $rContato);
             $stm->bindValue(':id', $rId);
-            $stm->bindValue(':cpf', $rCpf);
             $stm->execute();
             if ($stm) {
                 Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU FORNECEDOR - ID:[' . $rId . ']');
@@ -144,7 +141,7 @@ class Fornecedores
             Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
         }
     }
-    
+
     public function contaFornecedores($rCondicao = '')
     {
         try {

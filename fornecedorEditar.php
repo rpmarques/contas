@@ -1,24 +1,22 @@
 <?php
 require_once './header.php';
 if ($_GET) {
-  if (isset($_GET['id'])){
+  if (isset($_GET['id'])) {
     $fornecedorID = base64_decode($_GET['id']);
     $fornecedor = $objFornecedores->pegaFornec($fornecedorID);
   }
-  
 }
 if ($_POST) {
   if (isset($_POST['id'])) {
-    $nome=$_POST['nome'];
-    $cnpj = $_POST['cnpj'];
+    $nome = $_POST['nome'];
+    $cnpj = $_POST['cgc'];
     $fone1 = $_POST['fone1'];
     $fone2 = $_POST['fone2'];
-    $email= $_POST['email'];
+    $email = $_POST['email'];
     $rContato = '';
     $fornecedorID = $_POST['id'];
-    $cpf= $_POST['cpf'];
 
-    $ret = $objFornecedores->update($nome, $cnpj, $fone1, $fone2, $email, $rContato, $fornecedorID, $cpf);
+    $ret = $objFornecedores->update($nome, $cnpj, $fone1, $fone2, $email, $rContato, $fornecedorID);
     $fornecedor = $objFornecedores->pegaFornec($fornecedorID);
   }
 }
@@ -50,7 +48,7 @@ if ($_POST) {
                 <input type="hidden" value="<?= $fornecedor->id; ?>" name="id">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                       <div class="form-group">
                         <label>Nome</label>
                         <input type="text" class="form-control form-control-sm" name="nome" value="<?= $fornecedor->nome; ?>">
@@ -58,26 +56,20 @@ if ($_POST) {
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label>CNPJ</label>
-                        <input type="text" class="form-control form-control-sm cnpj" name="cnpj" data-inputmask='"mask": "99.999.999/9999-99"' data-mask value="<?= $fornecedor->cnpj; ?>">
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>CPF</label>
-                        <input class="form-control form-control-sm cpf" name="cpf" data-inputmask='"mask": "999.999.999-99"' data-mask value="<?= $fornecedor->cpf; ?>">
+                        <label>CNPJ / CPF</label>
+                        <input type="text" class="form-control form-control-sm cgc" name="cgc" value="<?= $fornecedor->cnpj; ?>">
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Fone 1</label>
-                        <input class="form-control form-control-sm fone" name="fone1" data-inputmask='"mask": "(99)-99999-9999"' data-mask value="<?= $fornecedor->fone1; ?>">
+                        <input class="form-control form-control-sm fone" name="fone1" value="<?= $fornecedor->fone1; ?>">
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>Fone 2</label>
-                        <input class="form-control form-control-sm fone" name="fone2" data-inputmask='"mask": "(99)-99999-9999"' data-mask value="<?= $fornecedor->fone2; ?>">
+                        <input class="form-control form-control-sm fone" name="fone2" value="<?= $fornecedor->fone2; ?>">
                       </div>
                     </div>
                     <div class="col-md-6">

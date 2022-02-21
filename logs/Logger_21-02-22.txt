@@ -1,0 +1,10 @@
+[14:20:25][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[15:32:26][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 
+[15:37:42][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[4] 
+[15:37:53][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[4] 
+[15:38:09][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[4] 
+[15:39:26][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 
+[15:40:01][::1]-> USUARIO:[Ricardo] - INSERIU FORNECEDOR 
+[18:54:38][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[19:26:23][::1]-> Usuario:[Ricardo] - ALTEROU FORNECEDOR - ID:[5] 
+[19:27:29][::1]-> Usuario:[Ricardo] - EXCLUIU FORNECEDOR - ID:[3] 

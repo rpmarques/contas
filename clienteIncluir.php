@@ -47,17 +47,10 @@ if ($_POST) {
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label>CNPJ</label>
+                      <label>CNPJ / CPF</label>
                       <input type="text" class="form-control form-control-sm cgc" name="cgc">
-                      <!-- <input type="text" class="form-control form-control-sm cnpj" name="cnpj" data-inputmask='"mask": "99.999.999/9999-99"' data-mask id="cnpj"> -->
                     </div>
                   </div>
-                  <!-- <div class="col-md-3">
-                    <div class="form-group">
-                      <label>CPF</label>
-                      <input class="form-control form-control-sm cpf" name="cpf" data-inputmask='"mask": "999.999.999-99"' data-mask id="cpf">
-                    </div>
-                  </div> -->
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Fone 1</label>

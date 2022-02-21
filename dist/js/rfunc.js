@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   //TROCAR MÁSCARA DINAMICAMENTE CPF OU CNPJ
   var options = {
     onKeyPress: function (cpf, ev, el, op) {
@@ -7,8 +6,10 @@ $(document).ready(function () {
       $('.cgc').mask((cpf.length > 14) ? masks[1] : masks[0], op);
     }
   }
-  $('.cgc').length > 11 ? $('.cgc').mask('00.000.000/0000-00', options) : $('.cgc').mask('000.000.000-00#', options);
 
+  if ($('.cgc').length > 2) {
+    $('.cgc').length > 11 ? $('.cgc').mask('00.000.000/0000-00', options) : $('.cgc').mask('000.000.000-00#', options);
+  }
 
   // PRICEFORMAT
   $('.valor').priceFormat({
@@ -63,47 +64,16 @@ $(document).ready(function () {
   $('.cep').mask('00000-000');
 
 
-
+  //TESTE SE CNPJ OU CPF É VÁLIDO AO PERDER O FOCO DO CAMPO
   $('.cgc').blur(function () {
     // O CPF ou CNPJ
     var cpf_cnpj = $(this).val();
     // Testa a validação
     if (valida_cpf_cnpj(cpf_cnpj)) {
-      alert('OK');
+      //alert('OK');
     } else {
       alert('CPF ou CNPJ inválido!');
     }
   });
 
 });
-
-  // $(function validaCpf() {
-  //   $('.cpf').blur(function () {
-  //     var cpf = $('.cpf').val();
-  //     // Testa a validação
-  //     console.log(cpf);
-  //     if (!valida_cpf_cnpj(cpf)) {
-  //       console.log("CPF INVÁLIDO");
-  //       alert('CPF  inválido!');
-  //       let xxx = document.getElementById("fone1");
-  //       xxx.focus();
-  //     } else {
-  //       console.log("CPF valido");
-  //     }
-  //   }); //FIM CPF
-  // });
-  // $(function validaCnpj() {
-  //   $('.cnpj').blur(function () {
-  //     var cnpj = $('.cnpj').val();
-  //     console.log(cnpj);
-  //     if (!valida_cpf_cnpj(cnpj)) {
-  //       //console.log("CNPJ INVÁLIDO");
-  //       alert('CNPJ  inválido!');
-  //       let xxx = document.getElementById("fone1");
-  //       xxx.focus();
-  //     } else {
-  //       console.log("CNPJ válido");
-  //     }
-
-  //   }); //FIM CNPJ
-  // });
